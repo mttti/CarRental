@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- <title>Document</title> -->
+</head>
+
+<body>
+    <nav>
+        <div id="logo">
+            <img src="~/img/logo.png">
+        </div>
+        <ul id="navList">
+            <li>
+                <a href="#home">Home</a>
+            </li>
+            <li>
+                <a href="#">Cennik</a>
+            </li>
+            <li>
+                <a href="#">Flota</a>
+            </li>
+            <li>
+                <a href="#">Zamów</a>
+            </li>
+            <li>
+                <a href="#">Kontakt</a>
+            </li>
+        </ul>
+        <div id="menu">
+            <div id="adminButton">Administracja</div>
+            <ul id="navAdmin">
+                <li>
+                    <a href="#">Użytkownicy</a>
+                </li>
+                <li>
+                    <a href="#">Samochody</a>
+                </li>
+                <li>
+                    <a href="#">Historia zamówień</a>
+                </li>
+                <li>
+                    <a href="#">Usterki</a>
+                </li>
+            </ul>
+        </div>
+        <div id="login">
+            <a href="#">Wyloguj</a>
+        </div>
+    </nav>
+    <div>@RenderBody()</div>
+    <footer>&copy; Mateusz Magiera</footer>
+</body>
+
+</html>
