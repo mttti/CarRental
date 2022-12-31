@@ -1,22 +1,18 @@
 body{
-    background-color: #9EE37D;
+    background-color: #aec3b0;
     padding: 0;
     margin: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 nav{
-    background-color: #63C132;
-    height: 10vh;
+    background-color: #124559;
+    height: 6vh;
     width: 100vw;
     margin: 0;
     padding: 2vh 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-bottom: 1px solid white;
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
 }
 #logo{
     display: flex;
@@ -29,6 +25,7 @@ nav{
     height: 9vh;
 }
 
+
 #navList{
     list-style-type: none;
     display: flex;
@@ -38,34 +35,35 @@ nav{
 }
 
 #navList li a{
-    text-align: center;
     text-decoration: none;
     color: white;
     font-size: 2vh;
-    background-color: #358600;
-    padding: 2vh 0; 
-    width: 12vw;
+    background-color: #598392;
+    padding: 2vh 4vw;
     transition: border 0.1s linear;
     border-bottom: 0 solid white;
     display: block;
     margin:0 0.5vw;
     border-radius: 3px;
-    box-sizing: border-box;
 }
 
 #navList li a:hover{
     border-bottom: 0.5vh solid white;
-    background-color: #4ab503;
+    background-color: #638d9c;
     transition: border 0.1s linear;
+}
+
+#login img{
+    width: 6vh;
+    margin-bottom: 0;
 }
 
 #login{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    width: 15vw;
+    width: 20vw;
     padding-right: 2vw;
-    box-sizing: border-box;
 }
 
 #login a{
@@ -75,7 +73,7 @@ nav{
 }
 
 #navAdmin{
-    background-color: #358600;
+    background-color: #598392;
     list-style-type: none;
     display: none;
     /* display: flex; */
@@ -98,8 +96,8 @@ nav{
 #adminButton, #mechanicButton{
     color: white;
     font-size: 2vh;
-    background-color: #358600;
-    width: 12vw;
+    background-color: #598392;
+    width: 13vw;
     padding: 2vh 0;
     text-align: center;
     transition: border 0.1s linear;
@@ -113,7 +111,7 @@ nav{
 
 #mechanicButton:hover{
     border-bottom: 0.5vh solid white;
-    background-color: #4ab503;
+    background-color: #638d9c;
     transition: border 0.1s linear;
 }
 
@@ -125,22 +123,12 @@ nav{
     display: flex;
 }
 
-#mainSection{
-    padding: 15vh 2vw;
-    text-align: justify;
-    /*position: relative;*/
-    box-sizing: border-box;
-    z-index: -1;
-}
-
-
 footer{
     width: 100vw;
     padding: 5vh 0;
-    background-color: #358600;
+    background-color: #124559;
     position: fixed;
     bottom: 0;
     text-align: center;
     color: white;
-    border-top: 1px solid white;
 }

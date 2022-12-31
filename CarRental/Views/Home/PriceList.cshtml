@@ -1,0 +1,23 @@
+﻿@model IEnumerable<PriceList>
+
+@{
+    Layout = "_NotLoggedInLayout";
+    ViewBag.Title = "Cennik";
+}
+<div id="mainSection">
+<table>
+    <tr>
+        <th>Cena startowa</th>
+        <th>Cena za godzine jazdy</th>
+        <th>Typ nadwozia</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.BasePrice.ToString("c")</td>
+            <td>@item.Price.ToString("c")</td>
+            <td>@item.CarType</td>
+        </tr>
+    }
+    </table>
+</div>

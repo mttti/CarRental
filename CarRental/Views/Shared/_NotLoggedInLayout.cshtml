@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+        <link rel="stylesheet" asp-href-include="lib/font-awesome/css/*.css" />
     <link rel="stylesheet" href="~/css/style.css">
-    <!-- <title>Document</title> -->
+    <title>@ViewBag.Title</title>
 </head>
 
 <body>
@@ -18,19 +19,33 @@
         </div>
         <ul id="navList">
             <li>
-                <a href="#home">Home</a>
+                @if(ViewBag.Title=="Home"){
+                <a style="border-bottom: 0.5vh solid white !important; background-color: #4ab503 !important;" asp-controller="Home" asp-action="Index">Home</a>
+                }else{
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                }
             </li>
             <li>
-                <a href="#">Cennik</a>
+                @if(ViewBag.Title=="Cennik"){
+                <a style="border-bottom: 0.5vh solid white !important; background-color: #4ab503 !important;" asp-controller="Home" asp-action="PriceList">Cennik</a>
+                }else{
+                <a asp-controller="Home" asp-action="PriceList">Cennik</a>
+                }
             </li>
             <li>
-                <a href="#">Flota</a>
+                <a  href="#">Flota</a>
             </li>
             <li>
                 <a href="#">Zamów</a>
             </li>
+            
             <li>
-                <a href="#">Kontakt</a>
+                @if (ViewBag.Title == "Kontakt")
+                {
+                    <a style="border-bottom: 0.5vh solid white !important; background-color: #4ab503 !important;" asp-controller="Home" asp-action="Contact">Kontakt</a>
+                }else{
+                    <a asp-controller="Home" asp-action="Contact">Kontakt</a>
+                }
             </li>
         </ul>
         <div id="login">

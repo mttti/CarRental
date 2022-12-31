@@ -1,9 +1,14 @@
+using CarRental.Models;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IPriceListRepository, EFPriceListRepository>();
+builder.Services.AddDbContext<AppDbContext>();
+
 
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
    .AddNegotiate();

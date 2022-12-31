@@ -1,16 +1,17 @@
 ﻿using CarRental.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using System.Diagnostics;
 
 namespace CarRental.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private IPriceListRepository _priceListRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IPriceListRepository priceListRepository)
         {
-            _logger = logger;
+            _priceListRepository = priceListRepository;
         }
 
         public IActionResult Index()
@@ -18,15 +19,32 @@ namespace CarRental.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Contact()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult PriceList()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(_priceListRepository.priceLists);
         }
+
+        public ViewResult Edit(int id)
+        {
+            return View(_priceListRepository.priceLists.FirstOrDefault(o => o.PriceListId == id));
+        }
+        [HttpPost]
+        public IActionResult Edit(PriceList priceList)
+        {
+            if (ModelState.IsValid)
+            {
+                _priceListRepository.Save(priceList);
+                TempData["message"] = $"{priceList.CarType} został edytowany.";
+                return RedirectToAction("PriceList");
+            }
+            else
+                return View(priceList);
+        }
+
     }
 }
