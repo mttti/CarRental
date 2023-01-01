@@ -1,0 +1,39 @@
+﻿@using CarRental.Models.ViewModels;
+@model PriceListViewModel
+
+@{
+    Layout = "_NotLoggedInLayout";
+    ViewBag.Title = "Flota";
+}
+
+<div id="mainSection">
+    <table>
+        <tr>
+            <th>Marka</th>
+            <th>Kolor</th>
+            <th>Przebieg</th>
+            <th>Opis</th>
+            <th>Typ nadwozia</th>
+            <th>Cena za godzinę</th>
+            <th>Cena startowa</th>
+            <th>Czy zepsuty?</th>
+        </tr>
+        @foreach (var item in Model.Cars)
+        {
+            <tr>
+                <td>@item.Brand</td>
+                <td>@item.Color</td>
+                <td>@item.Mileage</td>
+                <td>@item.Description</td>
+                <td>@Model.PriceList.FirstOrDefault(o=>o.PriceListId==item.PriceListId).CarType</td>
+                <td>@Model.PriceList.FirstOrDefault(o=>o.PriceListId==item.PriceListId).Price.ToString("c")</td>
+                <td>@Model.PriceList.FirstOrDefault(o=>o.PriceListId==item.PriceListId).BasePrice.ToString("c")</td>
+                <td>@item.IsBroken.ToString()</td>
+                <td>
+                    <img style="height:10vh;" src="~/img/@item.ImgSrc">
+
+                </td>
+            </tr>
+        }
+    </table>
+</div>

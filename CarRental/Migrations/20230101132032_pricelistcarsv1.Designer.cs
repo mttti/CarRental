@@ -2,6 +2,7 @@
 using CarRental.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRental.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class PriceListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230101132032_pricelistcarsv1")]
+    partial class pricelistcarsv1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
@@ -19,12 +22,7 @@ namespace CarRental.Migrations
             modelBuilder.Entity("CarRental.Models.Car", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -45,12 +43,7 @@ namespace CarRental.Migrations
                     b.Property<int>("Mileage")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("PriceListId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PriceListId");
 
                     b.ToTable("cars");
 
@@ -58,35 +51,29 @@ namespace CarRental.Migrations
                         new
                         {
                             Id = 1,
-                            Brand = "BMW",
                             Color = "Czarny",
                             Description = "Czarne bmw. Szybsze niż wiatr.",
                             ImgSrc = "bmw.png",
                             IsBroken = false,
-                            Mileage = 100,
-                            PriceListId = 1
+                            Mileage = 100
                         },
                         new
                         {
                             Id = 2,
-                            Brand = "AUDI",
                             Color = "Czerwony",
                             Description = "Czerwone audi. Brak dachu zwiększa przyspieszenie.",
                             ImgSrc = "audi.png",
                             IsBroken = false,
-                            Mileage = 40,
-                            PriceListId = 2
+                            Mileage = 40
                         },
                         new
                         {
                             Id = 3,
-                            Brand = "CITROEN",
                             Color = "Biały",
                             Description = "Biały Citroen. Duże gabarty pozwolą na komfortowe podróże dla całej rodziny.",
                             ImgSrc = "citroen.png",
                             IsBroken = false,
-                            Mileage = 200,
-                            PriceListId = 3
+                            Mileage = 200
                         });
                 });
 
@@ -134,19 +121,72 @@ namespace CarRental.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CarRental.Models.PriceListCars", b =>
+                {
+                    b.Property<int>("PriceListId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CarID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("PriceListId", "CarID");
+
+                    b.HasIndex("CarID");
+
+                    b.ToTable("PriceListCars");
+
+                    b.HasData(
+                        new
+                        {
+                            PriceListId = 1,
+                            CarID = 1
+                        },
+                        new
+                        {
+                            PriceListId = 2,
+                            CarID = 2
+                        },
+                        new
+                        {
+                            PriceListId = 3,
+                            CarID = 3
+                        });
+                });
+
             modelBuilder.Entity("CarRental.Models.Car", b =>
                 {
                     b.HasOne("CarRental.Models.PriceList", "PriceList")
                         .WithMany("cars")
-                        .HasForeignKey("PriceListId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("PriceList");
                 });
 
+            modelBuilder.Entity("CarRental.Models.PriceListCars", b =>
+                {
+                    b.HasOne("CarRental.Models.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CarRental.Models.PriceList", "PriceList")
+                        .WithMany("PriceListCars")
+                        .HasForeignKey("PriceListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("PriceList");
+                });
+
             modelBuilder.Entity("CarRental.Models.PriceList", b =>
                 {
+                    b.Navigation("PriceListCars");
+
                     b.Navigation("cars");
                 });
 #pragma warning restore 612, 618

@@ -2,6 +2,7 @@
 using CarRental.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRental.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class PriceListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230101140504_Car_v2")]
+    partial class Carv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
@@ -21,10 +24,6 @@ namespace CarRental.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -58,7 +57,6 @@ namespace CarRental.Migrations
                         new
                         {
                             Id = 1,
-                            Brand = "BMW",
                             Color = "Czarny",
                             Description = "Czarne bmw. Szybsze niż wiatr.",
                             ImgSrc = "bmw.png",
@@ -69,7 +67,6 @@ namespace CarRental.Migrations
                         new
                         {
                             Id = 2,
-                            Brand = "AUDI",
                             Color = "Czerwony",
                             Description = "Czerwone audi. Brak dachu zwiększa przyspieszenie.",
                             ImgSrc = "audi.png",
@@ -80,7 +77,6 @@ namespace CarRental.Migrations
                         new
                         {
                             Id = 3,
-                            Brand = "CITROEN",
                             Color = "Biały",
                             Description = "Biały Citroen. Duże gabarty pozwolą na komfortowe podróże dla całej rodziny.",
                             ImgSrc = "citroen.png",
