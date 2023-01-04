@@ -2,6 +2,7 @@
 using CarRental.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRental.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class PriceListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230104153844_reviews_v1")]
+    partial class reviewsv1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
@@ -73,7 +76,7 @@ namespace CarRental.Migrations
                             Color = "Czerwony",
                             Description = "Czerwone audi. Brak dachu zwiększa przyspieszenie.",
                             ImgSrc = "audi.png",
-                            IsBroken = false,
+                            IsBroken = true,
                             Mileage = 40,
                             PriceListId = 2
                         },
@@ -134,6 +137,52 @@ namespace CarRental.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CarRental.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("Reviews");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CarId = 1,
+                            Description = "Przyjemnyd samochód",
+                            Rating = 4
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CarId = 2,
+                            Description = "Słaby samochód",
+                            Rating = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CarId = 3,
+                            Description = "Średni samochód",
+                            Rating = 3
+                        });
+                });
+
             modelBuilder.Entity("CarRental.Models.Car", b =>
                 {
                     b.HasOne("CarRental.Models.PriceList", "PriceList")
@@ -143,6 +192,22 @@ namespace CarRental.Migrations
                         .IsRequired();
 
                     b.Navigation("PriceList");
+                });
+
+            modelBuilder.Entity("CarRental.Models.Review", b =>
+                {
+                    b.HasOne("CarRental.Models.Car", "Car")
+                        .WithMany("Reviews")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+                });
+
+            modelBuilder.Entity("CarRental.Models.Car", b =>
+                {
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("CarRental.Models.PriceList", b =>

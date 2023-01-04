@@ -35,16 +35,14 @@
             <li>
                 @if (ViewBag.Title == "Flota")
                 {
-                    <a style="border-bottom: 0.5vh solid white !important; background-color: #4ab503 !important;" asp-controller="Home" asp-action="PriceList">Cennik</a>
+                    <a style="border-bottom: 0.5vh solid white !important; background-color: #4ab503 !important;" asp-controller="Home" asp-action="PriceList">Flota</a>
                 }
                 else
                 {
                     <a asp-controller="Car" asp-action="Index">Flota</a>
                 }
             </li>
-            <li>
-                <a href="#">Zamów</a>
-            </li>
+
             
             <li>
                 @if (ViewBag.Title == "Kontakt")

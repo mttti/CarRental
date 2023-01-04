@@ -2,7 +2,7 @@
 {
     public class EFCarRepository : ICarRepository
     {
-        public AppDbContext context;
+        private AppDbContext context;
         public EFCarRepository(AppDbContext context)
         {
             this.context = context;

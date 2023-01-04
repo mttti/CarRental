@@ -24,5 +24,7 @@ namespace CarRental.Models
         public PriceList? PriceList { get; set; }
 
         public int PriceListId { get; set; }
+
+        public ICollection<Review> Reviews { get; set; }
     }
 }

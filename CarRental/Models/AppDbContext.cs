@@ -8,6 +8,7 @@ namespace CarRental.Models
     {
         public DbSet<PriceList> priceLists { get; set; }
         public DbSet<Car> cars { get; set; }
+        public DbSet<Review> reviews { get; set; }
         public string DbPath { get; set; }
 
         public AppDbContext()
@@ -21,6 +22,12 @@ namespace CarRental.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Review>().HasData(
+                new Review() { Id = 1, CarId = 1, Rating = 4, Description="Przyjemnyd samochód"},
+                new Review() { Id = 2, CarId = 2, Rating = 2, Description="Słaby samochód"},
+                new Review() { Id = 3, CarId = 3, Rating = 3, Description="Średni samochód"}
+                );
+
             modelBuilder.Entity<PriceList>().HasData(
                 new PriceList() { PriceListId = 1, Price = 400, BasePrice = 800, CarType = "Kabriolet" },
                 new PriceList() { PriceListId = 2, Price = 100, BasePrice = 200, CarType = "Kompakt" },
@@ -39,10 +46,10 @@ namespace CarRental.Models
                 .WithOne(p => p.PriceList)
                 .HasForeignKey(k => k.PriceListId);
 
-
-                
-
-
+            modelBuilder.Entity<Car>()
+                .HasMany(r=>r.Reviews)
+                .WithOne(c=>c.Car)
+                .HasForeignKey(k => k.CarId);
         }
     }
 }

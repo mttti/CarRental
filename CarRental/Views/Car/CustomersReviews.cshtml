@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Review>
+
+@{
+    ViewBag.Title = "Opinie";
+    Layout = "_NotLoggedInLayout";
+}
+<div id="mainSection">
+@foreach (var review in Model)
+{
+    <p>@review.CarId</p>
+    <p>@review.Description</p>
+}
+
+Średnia ocena: @Model.Average(o=>o.Rating)
+</div>

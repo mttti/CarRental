@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IPriceListRepository, EFPriceListRepository>();
 builder.Services.AddScoped<ICarRepository, EFCarRepository>();
+builder.Services.AddScoped<IReviewRepository, EFReviewRepository>();
 builder.Services.AddDbContext<AppDbContext>();
 
 

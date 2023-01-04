@@ -8,12 +8,14 @@ namespace CarRental.Controllers
     {
         private ICarRepository carRepository;
         private IPriceListRepository priceListRepository;
+        private IReviewRepository reviewRepository;
         
 
-        public CarController(ICarRepository carRepository, IPriceListRepository priceListRepository)
+        public CarController(ICarRepository carRepository, IPriceListRepository priceListRepository, IReviewRepository reviewRepository)
         {
             this.carRepository = carRepository;
             this.priceListRepository = priceListRepository;
+            this.reviewRepository = reviewRepository;
         }
 
         public IActionResult Index()
@@ -21,7 +23,8 @@ namespace CarRental.Controllers
             var viewModel = new PriceListViewModel
             {
                 PriceList = priceListRepository.priceLists,
-                Cars = carRepository.cars.Where(a => a.IsBroken==false)
+                Cars = carRepository.cars.Where(a => a.IsBroken==false),
+                Reviews = reviewRepository.Reviews
             };
 
             return View(viewModel);
@@ -36,6 +39,11 @@ namespace CarRental.Controllers
             };
 
             return View("Index",viewModel);
+        }
+
+        public IActionResult CustomersReviews(int carID)
+        {
+            return View(reviewRepository.Reviews.Where(r=>r.CarId==carID));
         }
     }
 }

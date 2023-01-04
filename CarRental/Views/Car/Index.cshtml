@@ -1,6 +1,8 @@
 ﻿@using CarRental.Models.ViewModels;
 @model PriceListViewModel
 
+
+
 @{
     Layout = "_NotLoggedInLayout";
     ViewBag.Title = "Flota";
@@ -16,7 +18,6 @@
             <th>Typ nadwozia</th>
             <th>Cena za godzinę</th>
             <th>Cena startowa</th>
-            <th>Czy zepsuty?</th>
         </tr>
         @foreach (var item in Model.Cars)
         {
@@ -28,12 +29,19 @@
                 <td>@Model.PriceList.FirstOrDefault(o=>o.PriceListId==item.PriceListId).CarType</td>
                 <td>@Model.PriceList.FirstOrDefault(o=>o.PriceListId==item.PriceListId).Price.ToString("c")</td>
                 <td>@Model.PriceList.FirstOrDefault(o=>o.PriceListId==item.PriceListId).BasePrice.ToString("c")</td>
-                <td>@item.IsBroken.ToString()</td>
                 <td>
                     <img style="height:10vh;" src="~/img/@item.ImgSrc">
-
+                </td>
+                <td>@Model.Reviews.FirstOrDefault(r=>r.CarId==item.Id).Description</td>
+                <td>
+                    <form id="@item.Id" asp-controller="Car" asp-action="CustomersReviews">
+                        <input type="hidden" name="carID" value=@item.Id>
+                        <button type="submit">Opinie</button>
+                    </form>
+                    <button>Zamów</button>
                 </td>
             </tr>
         }
+
     </table>
 </div>
