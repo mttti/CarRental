@@ -3,6 +3,7 @@ using System;
 using CarRental.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRental.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230109184732_roles_v1")]
+    partial class rolesv1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
@@ -210,14 +213,14 @@ namespace CarRental.Migrations
                         new
                         {
                             Id = "0773fad5-d7e7-47e1-9ef8-6fad8120694f",
-                            ConcurrencyStamp = "360c7518-36a9-40f7-8ee7-a1bc489c15fb",
+                            ConcurrencyStamp = "a5796b19-8a7d-460d-a3f8-8ee9d4b2ff99",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5d1880d4-bc4a-4873-9043-5320c72b35c0",
-                            ConcurrencyStamp = "f7640d16-4474-46fa-834b-8bcef9570c8b",
+                            ConcurrencyStamp = "6faa80c8-53f8-4566-ae75-0a8cf1135220",
                             Name = "mechanik",
                             NormalizedName = "MECHANIK"
                         });
@@ -376,18 +379,6 @@ namespace CarRental.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "26481377-54b6-4866-9552-673295ea5e98",
-                            RoleId = "0773fad5-d7e7-47e1-9ef8-6fad8120694f"
-                        },
-                        new
-                        {
-                            UserId = "ff023250-c33f-48c2-80b8-703f5ab34531",
-                            RoleId = "5d1880d4-bc4a-4873-9043-5320c72b35c0"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -428,15 +419,15 @@ namespace CarRental.Migrations
                         {
                             Id = "26481377-54b6-4866-9552-673295ea5e98",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0a437b19-34b6-4f7b-a2eb-52cb5661bf5b",
+                            ConcurrencyStamp = "ab5248b1-a21b-418b-ac10-1abc6d5875b1",
                             Email = "admin@admin.pl",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.PL",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEChrzaLd0PBvn8uaQB/dm4UQbpZmBUSAVEnP97LMn/z7xdNqi2ueFWePQMM9VTh+Mw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFeknyCuIo+gHhv9YBGXLEW24TZIVpKXaoYr2ulxmBNz8piIVq62ShxfIjD8up2Oqw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a35d9a19-0724-42c3-8384-095bea85d803",
+                            SecurityStamp = "333d4998-0339-4273-b408-27cd2eea0091",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             LastName = "Magiera",
@@ -446,15 +437,15 @@ namespace CarRental.Migrations
                         {
                             Id = "ff023250-c33f-48c2-80b8-703f5ab34531",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fe665c09-1d2d-4cfb-ade1-2f68efa79445",
+                            ConcurrencyStamp = "0e7a8c57-046e-4bf8-b813-e251f270e949",
                             Email = "Mietekmechanik@onet.pl",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "MIETEKMECHANIK@ONET.PL",
                             NormalizedUserName = "MIETEKMECHANIK",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDwHPnG/OHh0bEpzU6OIUWQ9jaQm8FSZaVxqewky2P9uIYvXsDTVHiGy/m26wSTGfg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIRTivmo5STqNNn8ZcmAPn67lopdKhPqf7P6gazOnnzpII7Dt/kKRRWy8WakIa8kEA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6a40d104-2137-4e9e-9487-2dea55cc677a",
+                            SecurityStamp = "178c111f-1feb-4b39-9971-951ff23db658",
                             TwoFactorEnabled = false,
                             UserName = "MietekMechanik",
                             LastName = "Kowalski",
@@ -464,15 +455,15 @@ namespace CarRental.Migrations
                         {
                             Id = "a4d55acc-2778-48ed-bd6e-7d454db01b09",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "634b9f59-54ef-4c20-b5a9-93ffa10ed777",
+                            ConcurrencyStamp = "8624c5c5-4919-4163-b57a-ddda5aa7edfe",
                             Email = "jnowak@interia.pl",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "JNOWAK@INTERIA.PL",
                             NormalizedUserName = "NOWAK_JAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFUkvK9a0qe/sDJXkAptReVirRLBeX84S8Ombqk3E6pmDVsPOA7y7/OlSOANIk6yLw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGBhA3gO6T/FSlyHRZbVsjNkndXqJA7KRt+TGIdoOpcp2vgt6H39i87klKchU9eRdQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7e2b8b8e-490c-4989-9710-3bd73507fd83",
+                            SecurityStamp = "d6c81550-5636-4061-83d6-efbe01f45d02",
                             TwoFactorEnabled = false,
                             UserName = "Nowak_Jan",
                             LastName = "Kowalski",

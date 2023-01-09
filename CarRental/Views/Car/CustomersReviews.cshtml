@@ -5,11 +5,11 @@
     Layout = "_NotLoggedInLayout";
 }
 <div id="mainSection">
+Średnia ocena: @Model.Average(o=>o.Rating)
+Marka: @Model.FirstOrDefault().Car.Brand
 @foreach (var review in Model)
 {
     <p>@review.CarId</p>
-    <p>@review.Description</p>
+    <p>@review.Description</p>     
 }
-
-Średnia ocena: @Model.Average(o=>o.Rating)
 </div>

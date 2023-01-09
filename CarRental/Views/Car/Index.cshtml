@@ -32,12 +32,13 @@
                 <td>
                     <img style="height:10vh;" src="~/img/@item.ImgSrc">
                 </td>
-                <td>@Model.Reviews.FirstOrDefault(r=>r.CarId==item.Id).Description</td>
                 <td>
-                    <form id="@item.Id" asp-controller="Car" asp-action="CustomersReviews">
+                  @*  <form id="@item.Id" asp-controller="Car" asp-action="CustomersReviews">
                         <input type="hidden" name="carID" value=@item.Id>
                         <button type="submit">Opinie</button>
-                    </form>
+                    </form>*@
+                    <button type="submit" asp-action="CustomersReviews" asp-controller="Car" asp-route-carId=@item.Id>Opinie</button>
+                    <a asp-action="CustomersReviews" asp-controller="Car" asp-route-carId=@item.Id>Opinie</a>
                     <button>Zamów</button>
                 </td>
             </tr>

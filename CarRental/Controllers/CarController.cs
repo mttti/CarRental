@@ -1,5 +1,6 @@
 ﻿using CarRental.Models;
 using CarRental.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.Controllers
@@ -17,6 +18,7 @@ namespace CarRental.Controllers
             this.priceListRepository = priceListRepository;
             this.reviewRepository = reviewRepository;
         }
+        [AllowAnonymous]
 
         public IActionResult Index()
         {
@@ -29,7 +31,7 @@ namespace CarRental.Controllers
 
             return View(viewModel);
         }
-
+        [Authorize(Roles = "mechanik, admin")]
         public IActionResult BrokenCars()
         {
             var viewModel = new PriceListViewModel
@@ -37,12 +39,15 @@ namespace CarRental.Controllers
                 PriceList = priceListRepository.priceLists,
                 Cars = carRepository.cars.Where(a => a.IsBroken == true)
             };
-
             return View("Index",viewModel);
         }
+        [AllowAnonymous]
 
         public IActionResult CustomersReviews(int carID)
         {
+            reviewRepository.Reviews
+                .FirstOrDefault(r => r.CarId == carID).Car=carRepository.cars
+                .FirstOrDefault(c=>c.Id==carID);
             return View(reviewRepository.Reviews.Where(r=>r.CarId==carID));
         }
     }

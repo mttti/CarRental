@@ -1,10 +1,12 @@
 ﻿using CarRental.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using System.Diagnostics;
 
 namespace CarRental.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private IPriceListRepository _priceListRepository;
