@@ -36,6 +36,7 @@
                     dbEntry.Description = car.Description;
                     dbEntry.ImgSrc = car.ImgSrc;
                     dbEntry.Mileage = car.Mileage;
+                    dbEntry.Model = car.Model;
                 }
             }
             context.SaveChanges();

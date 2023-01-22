@@ -48,7 +48,7 @@ namespace CarRental.Models
 
 
             modelBuilder.Entity<Review>().HasData(
-                new Review() { Id = 1, CarId = 1, Rating = 4, Description="Przyjemnyd samochód"},
+                new Review() { Id = 1, CarId = 1, Rating = 4, Description="Przyjemny samochód"},
                 new Review() { Id = 2, CarId = 2, Rating = 2, Description="Słaby samochód"},
                 new Review() { Id = 3, CarId = 3, Rating = 3, Description="Średni samochód"}
                 );
@@ -60,9 +60,9 @@ namespace CarRental.Models
                 );
 
             modelBuilder.Entity<Car>().HasData(
-                new Car() { Id = 1, Color = "Czarny", IsBroken = false, Mileage = 100, Description = "Czarne bmw. Szybsze niż wiatr.", ImgSrc = "bmw.png", PriceListId=1, Brand="BMW" },
-                new Car() { Id = 2, Color = "Czerwony", IsBroken = true, Mileage = 40, Description = "Czerwone audi. Brak dachu zwiększa przyspieszenie.", ImgSrc = "audi.png", PriceListId=2, Brand="AUDI" },
-                new Car() { Id = 3, Color = "Biały", IsBroken = false, Mileage = 200, Description = "Biały Citroen. Duże gabarty pozwolą na komfortowe podróże dla całej rodziny.", ImgSrc = "citroen.png",PriceListId=3, Brand="CITROEN" }
+                new Car() { Id = 1, Color = "Czarny", IsBroken = false, Mileage = 100, Description = "Czarne bmw. Szybsze niż wiatr.", ImgSrc = "bmw.png", PriceListId=1, Brand="BMW", Model="M850i" },
+                new Car() { Id = 2, Color = "Czerwony", IsBroken = true, Mileage = 40, Description = "Czerwone audi. Brak dachu zwiększa przyspieszenie.", ImgSrc = "audi.png", PriceListId=2, Brand="AUDI", Model="A3" },
+                new Car() { Id = 3, Color = "Biały", IsBroken = false, Mileage = 200, Description = "Biały Citroen. Duże gabarty pozwolą na komfortowe podróże dla całej rodziny.", ImgSrc = "citroen.png",PriceListId=3, Brand="CITROEN", Model="C5" }
                 );
 
 

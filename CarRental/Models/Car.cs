@@ -20,6 +20,8 @@ namespace CarRental.Models
 
         [Required(ErrorMessage ="Podaj markę pojazdu.")]
         public string Brand { get; set; }
+        [Required(ErrorMessage ="Podaj model pojazdu.")]
+        public string Model { get; set; }
 
         public PriceList? PriceList { get; set; }
 

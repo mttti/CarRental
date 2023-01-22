@@ -8,21 +8,25 @@
     ViewBag.Title = "Flota";
 }
 
-<div id="mainSection">
-    <table>
-        <tr>
+<div class="table-responsive-md">
+    <table class="table table-hover table-light">
+        <tr class="align-middle">
             <th>Marka</th>
+            <th>Model</th>
             <th>Kolor</th>
             <th>Przebieg</th>
             <th>Opis</th>
             <th>Typ nadwozia</th>
             <th>Cena za dzień</th>
             <th>Cena startowa</th>
+            <th>Podgląd</th>
+            <th>Akcje</th>
         </tr>
         @foreach (var item in Model.Cars)
         {
-            <tr>
+            <tr class="align-middle">
                 <td>@item.Brand</td>
+                <td>@item.Model</td>
                 <td>@item.Color</td>
                 <td>@item.Mileage</td>
                 <td>@item.Description</td>

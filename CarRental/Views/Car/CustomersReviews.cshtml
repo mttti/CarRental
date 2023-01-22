@@ -4,12 +4,18 @@
     ViewBag.Title = "Opinie";
     Layout = "_Layout";
 }
-<div id="mainSection">
-Średnia ocena: @Model.Average(o=>o.Rating)
-Marka: @Model.FirstOrDefault().Car.Brand
+<div class="row justify-content-around">
+    <h2>@Model.FirstOrDefault().Car.Brand @Model.FirstOrDefault().Car.Model</h2>
+    <h3>Średnia ocena: @Model.Average(o=>o.Rating)</h3>
+    <h4>Opinie klientów:</h4>
+</div>
+<div class="row justify-content-center">
 @foreach (var review in Model)
 {
-    <p>@review.CarId</p>
-    <p>@review.Description</p>     
+    <div class="col-md-5 bg-light text-black rounded-3 m-3">      
+        <p>@review.Description</p>
+        <p>Ocena: @review.Rating/5</p>
+        <p class="text-right">Łukasz </p>
+    </div>
 }
 </div>

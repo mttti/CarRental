@@ -4,19 +4,19 @@
     Layout = "_Layout";
     ViewBag.Title = "Cennik";
 }
-<div id="mainSection">
-<table>
+<div class="table-responsive-md ">
+    <table class="table table-hover table-light">
     <tr>
-        <th>Cena startowa</th>
-        <th>Cena za godzine jazdy</th>
-        <th>Typ nadwozia</th>
+        <th scope="col">Typ nadwozia</th>
+        <th scope="col">Cena startowa</th>
+        <th scope="col">Cena za dzień</th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
+            <td>@item.CarType</td>
             <td>@item.BasePrice.ToString("c")</td>
             <td>@item.Price.ToString("c")</td>
-            <td>@item.CarType</td>
         </tr>
     }
     </table>
