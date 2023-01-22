@@ -3,49 +3,44 @@
 
 @{
     Layout = "_Layout";
+    ViewBag.Title = "Logowanie";
 }
 
-<div id="mainSection">
         <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@Model.ReturnUrl" method="post" role="form">
             <h4>Zaloguj sie przy pomocy konta</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Login" class="col-md-2">Login:</label>
-                <div class="col-md-10">
-                    <input asp-for="Login" class="form-control" />
+            <div class="row justify-content-md-center"> 
+                <div class="col-md-3">
                     <span asp-validation-for="Login" class="text-danger"></span>
+                    <input asp-for="Login" placeholder="Login" class="form-control mb-5 h-75" />
                 </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="col-md-2">Hasło:</label>
-                <div class="col-md-10">
-                    <input asp-for="Password" class="form-control" />
+
+            <div class="row justify-content-md-center"> 
+                <div class="col-md-3">
                     <span asp-validation-for="Password" class="text-danger"></span>
+                    <input asp-for="Password" placeholder="Hasło" class="form-control mb-5 h-75" />
                 </div>
             </div>
-            <div class="form-group">
-                <div class=" col-md-10">
+
+            <div class="row justify-content-md-center">
+                 <div class=" col-md-10">
                     <div class="custom-checkbox">
                         <label asp-for="RememberMe">Zapamiętaj mnie
                             <input asp-for="RememberMe" />
-                            @*@Html.DisplayNameFor(m => m.RememberMe)*@
                         </label>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="row justify-content-md-center"> 
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-success form-control">Zaloguj</button>
+                    <button type="submit" class="btn btn-success form-control mt-3 h-75 w-100">Zaloguj się</button>
                 </div>
             </div>
             <p>
                 <h5>Nie masz konta?</h5>
-                <a asp-action="Register" style="color: white; text-decoration: none">Zarejestruj sie!</a>
-            </p>
-            <p>
-@*                <a asp-action="ForgotPassword"> Forgot your passowrd?</a>*@
+                <a asp-action="Register" style="color: white; text-decoration: none">Kliknij tutaj aby się zarejestrować!</a>
             </p>
         </form>
-        </div>

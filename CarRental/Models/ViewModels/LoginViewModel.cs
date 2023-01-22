@@ -4,9 +4,9 @@ namespace CarRental.Models.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage ="Wpisz login!")]
         public string Login { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Wpisz hasło!")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

@@ -26,7 +26,7 @@ namespace CarRental.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var hashed = new PasswordHasher<IdentityUser>();
+            var hashed = new PasswordHasher<AppUser>();
             modelBuilder.Entity<AppUser>().HasData(
                 new AppUser {Id= "26481377-54b6-4866-9552-673295ea5e98", Email = "admin@admin.pl", NormalizedEmail = "ADMIN@ADMIN.PL", UserName = "Admin", NormalizedUserName = "ADMIN", PasswordHash = hashed.HashPassword(null, "Administrator1!"), Name="Mateusz", LastName="Magiera"},
 

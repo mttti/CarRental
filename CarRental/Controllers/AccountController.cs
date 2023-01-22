@@ -10,19 +10,16 @@ namespace CarRental.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+
+        /*        private readonly UserManager<AppUser> _userManager;
+                private readonly SignInManager<AppUser> _signInManager;*/
         public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
-        [AllowAnonymous]
-        public async Task<IActionResult> Register(string? returnUrl = null)
-        {
-            RegisterViewModel registerViewModel = new RegisterViewModel();
-            registerViewModel.ReturnUrl = returnUrl;    
-            return View(registerViewModel);
-        }
+        
 
         [AllowAnonymous]
         [HttpGet]
@@ -70,6 +67,16 @@ namespace CarRental.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Register(string? returnUrl = null)
+        {
+            RegisterViewModel registerViewModel = new RegisterViewModel();
+            registerViewModel.ReturnUrl = returnUrl;
+            return View(registerViewModel);
+        }
+
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel, string? returnUrl)
@@ -78,7 +85,7 @@ namespace CarRental.Controllers
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new AppUser() { UserName = registerViewModel.Login, Email=registerViewModel.Email};
+                var user = new AppUser() { UserName = registerViewModel.Login, Email=registerViewModel.Email, Name=registerViewModel.Name, LastName=registerViewModel.LastName};
                 var result = await _userManager.CreateAsync(user, registerViewModel.Password);
                 if (result.Succeeded)
                 {

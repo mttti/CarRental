@@ -1,46 +1,79 @@
 ﻿@using CarRental.Models.ViewModels
 @model RegisterViewModel
 @{
-       Layout = "_Layout";
+    ViewBag.Title = "Zarejestruj się";
+    Layout = "_Layout";
 }
 
 
 @*<h1 class="text-info">Register</h1>*@
 <form asp-controller="Account" asp-action="Register" method="post" role="form">
-    <h4>Utwórz konto</h4>
+    <h2>Utwórz konto</h2>
     <hr />
-    <div class="form-group">
-        <label asp-for="Email" class="col-md-2">Adres email:</label>
-        <div class="col-md-10">
-            <input asp-for="Email" class="form-control" />
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Email" class="col-md-2"><h5>Adres email:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Email" class="form-control mb-3" />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Login" class="col-md-2">Login:</label>
-        <div class="col-md-10">
-            <input asp-for="Login" class="form-control" />
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Login" class="col-md-2"><h5>Login:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Login" class="form-control mb-3" />
             <span asp-validation-for="Login" class="text-danger"></span>
         </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Password" class="col-md-2">Hasło:</label>
-        <div class="col-md-10">
-            <input asp-for="Password" class="form-control" />
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Name" class="col-md-2"><h5>Imię: </h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Name" class="form-control mb-3" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="LastName" class="col-md-2"><h5>Nazwisko:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="LastName" class="form-control mb-3" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Password" class="col-md-2"><h5>Hasło:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Password" class="form-control mb-3" />
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
     </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword" class="col-md-2">Potwierdź hasło:</label>
-        <div class="col-md-10">
-            <input asp-for="ConfirmPassword" class="form-control" />
+
+    <div class="row justify-content-md-center">
+        <label asp-for="ConfirmPassword" class="col-md-2"><h5>Potwierdź hasło:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="ConfirmPassword" class="form-control mb-3" />
             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
         </div>
-    </div>   
+    </div>
     <br />
-    <div class="form-group">
-        <div class="offset-md-2 col-md-10">
-            <button type="submit" class="btn btn-success">Zarejestruj</button>
+    <div class="row justify-content-md-center">
+        <div class="offset-md-2 col-md-3">
+            <button type="submit" class="btn btn-success h-100 w-75">Zarejestruj się</button>
         </div>
     </div>
 </form>
