@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 
 namespace CarRental.Models
 {
@@ -26,7 +28,7 @@ namespace CarRental.Models
         public PriceList? PriceList { get; set; }
 
         public int PriceListId { get; set; }
-
+        [BindNever]
         public ICollection<Review>? Reviews { get; set; }
         public ICollection<Order>? Orders { get; set; }
     }
