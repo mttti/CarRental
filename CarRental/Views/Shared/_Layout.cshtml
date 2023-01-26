@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
+@inject SignInManager<AppUser> SignInManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,11 +13,13 @@
     <link rel="stylesheet" asp-href-include="lib/font-awesome/css/*.css" />
     <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*.min.css" />
     <link rel="stylesheet" asp-href-include="~/css/style.css">
+    <link href="~/favicon.ico" rel="shortcut icon" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
     <nav id="nav">
         <ul>
+
             <li>
                 @if (ViewBag.Title == "Home")
                 {
@@ -64,21 +66,52 @@
                     Administracja
                     <ul>
                         <li>
-                            <a href="#">opcja 1</a>
+                            <a asp-controller="Admin" asp-action="Reviews">Opinie</a>
                         </li>
-                        <li>opcja 2</li>
-                        <li>opcja 3</li>
-                        <li>opcja 4</li>
+                        <li>
+                            <a asp-controller="Admin" asp-action="PriceList">Cennik</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Admin" asp-action="Orders">Zamówienia</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Admin" asp-action="Cars">Samochody</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Admin" asp-action="CarDefects">Usterki</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Admin" asp-action="Roles">Role</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Admin" asp-action="Users">Użytkownicy</a>
+                        </li>
                     </ul>
                 </li>
             }
             @if (User.IsInRole("mechanik"))
             {
-                <li>Usterki</li>
+                <li>
+                    <a asp-controller="Mechanic" asp-action="BrokenCars">Usterki</a>
+                </li>
             }
             @if (SignInManager.IsSignedIn(User))
             {
-                <li>Konto</li>
+                @if (!User.IsInRole("admin"))
+                {
+                <li id="accountOptions">
+                Konto
+                    <ul>
+                        <li>
+                            <a asp-controller="User" asp-action="Index" asp-route-Name=@User.Identity.Name>Ustawienia</a>                            
+                         </li>
+                        <li>
+                            <a asp-controller="Order" asp-action="Index" asp-route-userName=@User.Identity.Name>Historia zamówień</a>                            
+                        </li>
+                    </ul>
+                </li>
+                }
+                
                 <li>
                     <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="Logout">
                         <button id="logoutButton" type="submit">Wyloguj</button>

@@ -59,13 +59,29 @@ nav ul li a {
 #adminOptions ul{
     display: none;
     position: absolute;
+    top: 200%;
     flex-direction: column;
     list-style-type: none;
-    margin-top: 5vh;
+    margin-top: 3vw;
     width: 14vw;
 }
 
+#accountOptions ul {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    list-style-type: none;
+    margin-top: 2vw;
+    margin-left: -3vw;
+    width: 13vw;
+    justify-content: center;
+}
+
 #adminOptions:hover ul{
+    display: flex;
+}
+
+#accountOptions:hover ul {
     display: flex;
 }
 
@@ -109,4 +125,8 @@ footer a:hover{
 }
 #logoutButton:hover {
     color: rgb(255, 208, 0) !important;
+}
+
+#adminOptions{
+    position: relative;
 }

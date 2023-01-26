@@ -1,0 +1,54 @@
+﻿@using CarRental.Models.ViewModels
+@model BrokenCarsViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Usterki";
+}
+
+<a asp-action="CarDefectEdit" asp-controller="Admin">
+    <btn class="btn btn-success mb-5 w-25 p-3">Dodaj nową usterkę</btn>
+</a>
+<hr />
+
+<table class="table table-light table-hover">
+    <tr>
+        <th>ID</th>
+        <th>ID samochodu</th>
+        <th>ID zamówienia</th>
+        <th>Marka</th>
+        <th>Model</th>
+        <th>Opis usterki</th>
+        <th>Zgłaszający</th>
+        <th>Czy problem został rozwiązany</th>
+        <th>Akcje</th>
+    </tr>
+    @foreach (var report in @Model.CarDefects)
+    {
+        <tr>
+            <td>@report.Id</td>
+            <td>@report.CarId</td>
+            <td>@report.OrderId</td>
+            <td>@Model.Cars.FirstOrDefault(i=>i.Id==report.CarId).Brand</td>
+            <td>@Model.Cars.FirstOrDefault(i=>i.Id==report.CarId).Model</td>
+            <td class="text-break">@report.Description</td>
+            <td>@report.UserName</td>
+            <td>@report.IsSolved</td>
+            <td>
+                <div class="row justify-content-center w-100">
+                    <div class="col">
+                        <a asp-controller="Admin" asp-action="CarDefectEdit" asp-route-carID=@report.CarId asp-route-reportID=@report.Id>
+                            <button class="btn btn-success">Edytuj</button>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a asp-controller="Admin" asp-action="CarDefectDelete" asp-route-reportID=@report.Id>
+                            <button class="btn btn-danger">Usuń</button>
+                        </a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+

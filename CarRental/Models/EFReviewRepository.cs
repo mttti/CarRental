@@ -34,6 +34,8 @@
                     dbEntry.Description = review.Description;
                     dbEntry.Rating = review.Rating;
                     dbEntry.CarId = review.CarId;
+                    dbEntry.userName = review.userName;
+                    dbEntry.OrderId=review.OrderId;
                 }
             }
             context.SaveChanges();

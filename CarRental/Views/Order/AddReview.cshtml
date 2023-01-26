@@ -1,0 +1,44 @@
+﻿@model Review
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Dodaj opinie";
+}
+
+<form asp-action="AddReview" asp-controller="Order" method="post">
+            <h2>Wystaw opinię</h2>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="row justify-content-md-center"> 
+                <div class="col-md-3">
+                    <h4>Napisz opinię.</h4>
+                    @*<input asp-for="Description" class="form-control mb-5 h-75" />*@
+                    <textarea asp-for="Description" placeholder="Maksymalna długość to 200 znaków" rows="8" cols="100" class="form-control"></textarea>
+                </div>
+            </div>
+            <h4>Wybierz ocene</h4>
+            <div class="row justify-content-md-center"> 
+                <div class="col-md-3">
+                    <select asp-for="Rating" required>
+                        <option value="" disabled selected>Wybierz ocene</option>
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                    </select>                  
+                </div>
+            </div>
+        <input type="hidden" asp-for="CarId" value=@Model.CarId />
+        <input type="hidden" asp-for="OrderId" value=@Model.OrderId />
+        <input type="hidden" asp-for="userName" value=@User.Identity.Name />
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <button type="submit" class="btn btn-success mt-3 w-50">Wyślij</button>
+            </div>
+            <div class="col-md-5">
+            <a asp-action="Index" asp-controller="Order" asp-route-userName=@User.Identity.Name>
+                <btn class="btn btn-danger mt-3 w-50">Anuluj</btn>
+            </a>
+            </div>
+        </div>
+</form>

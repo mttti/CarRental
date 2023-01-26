@@ -1,0 +1,67 @@
+﻿@using CarRental.Models.ViewModels
+@model OrderListViewModel
+@{
+    ViewBag.Title = "Historia zamówień";
+    Layout = "_Layout";
+}
+
+<h1>Historia zamówień</h1>
+<hr>
+<div class="table-responsive">
+<table class="table table-light table-hover">
+    <tr>
+        <th>Numer zamówienia</th>
+        <th>Cena</th>
+        <th>Data wypożyczenia</th>
+        <th>Data oddania</th>
+        <th>Samochód</th>
+        <th>Akcje</th>
+    </tr>
+@foreach (var item in Model.Orders.Reverse())
+{
+    <tr>
+        <td>@item.Id</td>
+        <td>@item.Price.ToString("c")</td>
+        <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
+        <td>@item.EndDate.ToString("dd/MM/yyyy")</td>
+        <td>@Model.Cars.FirstOrDefault(i=>i.Id==@item.CarId).Brand @Model.Cars.FirstOrDefault(i=>i.Id==@item.CarId).Model</td>
+        <td>
+            <div class="row justify-content-center w-100"> 
+                <div class="col">
+                    @if (@item.IsReviewed==true)
+                    {
+                        <button class="btn btn-success" disabled>
+                            Dziękujemy za ocene!
+                        </button>
+                    }
+                    else
+                    {
+                    <a asp-controller="Order" asp-action="AddReview" asp-route-carID=@item.CarId asp-route-orderID="@item.Id">
+                        <button class="btn btn-success">
+                            Oceń zamówienie
+                        </button>
+                    </a>
+                    } 
+                </div>     
+                <div class="col">
+                    @if (@item.IsReported == true)
+                    {
+                        <button class="btn btn-danger disabled">
+                            Dziękujemy za zgłoszenie!
+                        </button>
+                    }
+                    else
+                    {
+                    <a asp-controller="Order" asp-action="ReportDefect" asp-route-carID=@item.CarId asp-route-orderID="@item.Id">
+                        <button class="btn btn-danger">
+                            Zgłoś usterkę
+                        </button>
+                    </a>
+                    }                            
+                </div>
+            </div>
+        </td>
+    </tr>
+}
+</table>
+</div>

@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject RoleManager<IdentityRole> roleManager
+@model IdentityRole
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Role";
+}
+
+<form asp-controller="Admin" asp-action="RoleEdit" method="post" role="form">
+    @if (!roleManager.Roles.Any(i=>i.Id==@Model.Id))
+    {
+        <h2>Dodaj role</h2>
+    }
+    else
+    {
+        <h2>Edytuj role</h2>       
+    }
+    <hr />
+    @*<div asp-validation-summary="All" class="text-danger"></div>*@
+
+    @if (!roleManager.Roles.Any(i=>i.Id==@Model.Id))
+        {
+        <div class="row justify-content-md-center">
+            <label asp-for="Id" class="col-md-2"><h5>ID:</h5></label>
+        </div>
+        }
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @if (Model.Id is not null)
+            {
+                <input type="hidden" asp-for="Id" value=@Model.Id />
+                <input asp-for="Id" class="form-control mb-3" value=@Model.Id disabled />
+            }
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Name" class="col-md-2"><h5>Nazwa:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Name" class="form-control mb-3" value=@Model.Name/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Zapisz</button>
+    <a asp-controller="Admin" asp-action="Roles">
+        <button class="btn btn-danger" type="button">Anuluj</button>
+    </a>
+</form>

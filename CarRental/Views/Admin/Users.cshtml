@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> userManager
+@model IEnumerable<AppUser>
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Użytkownicy";
+}
+<a asp-action="Register" asp-controller="Account">
+    <btn class="btn btn-success mb-5 w-25 p-3">Dodaj nowego użytkownika</btn>
+</a>
+<table class="table table-light table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Login</th>
+        <th>Imie</th>
+        <th>Nazwisko</th>
+        <th>E-mail</th>
+        <th>Numer telefonu</th>
+        <th>Rola</th>
+        <th>Akcje</th>
+    </tr>
+    @foreach (var user in Model)
+    {   
+    <tr>
+        <td>@user.Id</td>
+        <td>@user.UserName</td>
+        <td>@user.Name</td>
+        <td>@user.LastName</td>
+        <td>@user.Email</td>
+        <td>@user.PhoneNumber</td>
+        <td>
+        @string.Join(", ", @userManager.GetRolesAsync(user).Result)
+        </td>
+        <td>
+            <div class="row">
+                <div class="col">
+                    <a asp-action="UserEdit" asp-controller="Admin" asp-route-userID=@user.Id>
+                        <btn class="btn btn-success">Edytuj</btn>
+                    </a>
+                </div>
+                @if(@User.Identity.Name==@user.UserName)
+                {
+                    <div class="col">
+                        <button class="btn btn-danger mt" disabled>Usuń</button>
+                    </div>
+                }
+                else
+                {
+                <div class="col">                        
+                    <a asp-action="UserDelete" asp-controller="Admin" asp-route-userID=@user.Id>
+                        <btn class="btn btn-danger mt">Usuń</btn>
+                    </a>   
+                </div> 
+                }              
+            </div>      
+        </td>
+    </tr>
+    }
+</table>

@@ -1,0 +1,33 @@
+﻿@using CarRental.Models.ViewModels
+@model BrokenCarsViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Usterki";
+}
+
+@if (@Model.CarDefects.Count() == 0)
+{
+    <h1>Brak historycznych usterek tego pojazdu</h1>
+}
+else
+{
+    <h1>Historia usterek @Model.Cars.FirstOrDefault(i=>i.Id==@Model.CarDefects.FirstOrDefault().CarId).Brand @Model.Cars.FirstOrDefault(i=>i.Id==@Model.CarDefects.FirstOrDefault().CarId).Model</h1>
+    <table class="table table-light">
+        <tr>
+            <th>Id</th>
+            <th>Opis usterki</th>
+        </tr>
+        @foreach (var report in @Model.CarDefects.Reverse())
+        {
+                <tr>
+                    <td>@report.Id</td>
+                    <td class="text-break">@report.Description</td>
+                </tr>
+        }
+    </table>
+    <a asp-controller="Mechanic" asp-action="BrokenCars">
+        <button class="btn btn-success">Powrót</button>
+    </a>
+    
+}

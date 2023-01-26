@@ -1,0 +1,128 @@
+﻿@using CarRental.Models.ViewModels
+@model OrderEditViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Oceny";
+    DateTime sDate;
+    DateTime eDate;
+    if (@Model.Order.Id != 0)
+    {        
+        sDate = @Model.Order.StartDate;
+        eDate = @Model.Order.EndDate;
+    }
+    else
+    {        
+        sDate = DateTime.Today;
+        eDate = DateTime.Today.AddDays(1);     
+    }
+    string startDate = $"{sDate.Year}-{sDate.Month.ToString("00")}-{sDate.Day.ToString("00")}";
+    string endDate = $"{eDate.Year}-{eDate.Month.ToString("00")}-{eDate.Day.ToString("00")}";
+
+}
+<form asp-controller="Admin" asp-action="OrderEdit" method="post" role="form">
+    
+    @if (@Model.Order.Id != 0)
+    {
+            <h2>Edytuj zamówienie</h2>
+    }
+    else
+    {
+            <h2>Dodaj zamówienie</h2>       
+    }
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (@Model.Order.Id != 0)
+    {
+            <div class="row justify-content-md-center">
+                <label asp-for="Order.Id" class="col-md-2"><h5>ID:</h5></label>
+            </div>
+    }
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @if (@Model.Order.Id != 0)
+            {
+                    <input type="hidden" asp-for="Order.Id" value=@Model.Order.Id />
+                    <input asp-for="Order.Id" class="form-control mb-3" value=@Model.Order.Id disabled />
+            }
+            <span asp-validation-for="Order.Id" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Order.CarId" class="col-md-2"><h5>ID samochodu:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @Html.DropDownList("Order.CarId", @Model.carIds)
+            <span asp-validation-for="Order.CarId" class="text-danger"></span>
+        </div>
+    </div>
+
+     <div class="row justify-content-md-center">
+        <label asp-for="Order.Price" class="col-md-2"><h5>Cena:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Order.Price" class="form-control mb-3" value=@Model.Order.Price />
+            <span asp-validation-for="Order.Price" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Order.UserId" class="col-md-2"><h5>Nazwa użytkownika:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @Html.DropDownList("Order.UserId", @Model.userNames)
+            <span asp-validation-for="Order.UserId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Order.StartDate" class="col-md-2"><h5>Data początkowa:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for=Order.StartDate type="date" value=@startDate required />
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Order.EndDate" class="col-md-2"><h5>Data końcowa:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for=Order.EndDate type="date" value=@endDate required />
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Order.IsReviewed" class="col-md-2"><h5>Czy oceniono:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">            
+            <select asp-for="Order.IsReviewed" required>
+                <option value="" disabled selected>Wybierz z listy</option>
+                <option value=true>Tak</option>
+                <option value=false>Nie</option>
+            </select>  
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Order.IsReported" class="col-md-2"><h5>Czy zgłoszono usterke:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">            
+            <select asp-for="Order.IsReported" required>
+                <option value="" disabled selected>Wybierz z listy</option>
+                <option value="true">Tak</option>
+                <option value="false">Nie</option>
+            </select>  
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Zapisz</button>
+    <a asp-controller="Admin" asp-action="Orders">
+        <button class="btn btn-danger" type="button">Anuluj</button>
+    </a>
+</form>

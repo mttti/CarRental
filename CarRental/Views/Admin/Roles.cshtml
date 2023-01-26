@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<IdentityRole>
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Role";
+}
+
+<a asp-action="RoleEdit" asp-controller="Admin">
+    <btn class="btn btn-success mb-5 w-25 p-3">Dodaj nową role</btn>
+</a>
+<hr />
+<div class="table-responsive-md">
+    <table class="table table-hover table-light">
+        <tr class="align-middle">
+            <th>ID</th>
+            <th>Nazwa</th>
+            <th>Akcje</th>
+        </tr>
+
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.Id</td>
+                <td>@role.Name</td>
+                <td>
+                    <div class="row">
+                        <div class="col">
+                            <a asp-action="RoleEdit" asp-controller="Admin" asp-route-roleID=@role.Id>
+                                <btn class="btn btn-success">Edytuj</btn>
+                            </a>
+                        </div>
+                        <div class="col">                        
+                            <a asp-action="RoleDelete" asp-controller="Admin" asp-route-roleID=@role.Id>
+                                <btn class="btn btn-danger">Usuń</btn>
+                            </a>   
+                        </div> 
+                    </div>       
+                </td>
+            </tr>
+        }
+    </table>
+</div>

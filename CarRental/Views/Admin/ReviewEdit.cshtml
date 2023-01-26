@@ -1,0 +1,97 @@
+﻿@using CarRental.Models.ViewModels
+@model ReviewEditViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Oceny";
+}
+
+<form asp-controller="Admin" asp-action="ReviewEdit" method="post" role="form">
+    @if (@Model.Review.Id != 0)
+    {
+        <h2>Edytuj opinie</h2>
+    }
+    else
+    {
+        <h2>Dodaj opinie</h2>       
+    }
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (@Model.Review.Id != 0)
+        {
+        <div class="row justify-content-md-center">
+            <label asp-for="Review.Id" class="col-md-2"><h5>ID:</h5></label>
+        </div>
+        }
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @if (@Model.Review.Id != 0)
+            {
+                <input type="hidden" asp-for="Review.Id" value=@Model.Review.Id />
+                <input asp-for="Review.Id" class="form-control mb-3" value=@Model.Review.Id disabled />
+            }
+            <span asp-validation-for="Review.Id" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Review.CarId" class="col-md-2"><h5>ID samochodu:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @Html.DropDownList("Review.CarId", @Model.selectListItem)
+            <span asp-validation-for="Review.CarId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Review.Description" class="col-md-2"><h5>Treść:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <textarea asp-for="Review.Description" rows="8" cols="100" class="form-control">@Model.Review.Description</textarea>
+            <span asp-validation-for="Review.Description" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Review.OrderId" class="col-md-2"><h5>Numer zamówienia:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Review.OrderId" class="form-control mb-3" value=@Model.Review.OrderId />
+            <span asp-validation-for="Review.OrderId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Review.Rating" class="col-md-2"><h5>Ocena:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            
+            <select asp-for="Review.Rating" required>
+                        <option value="" disabled selected>Wybierz ocene</option>
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                    </select>  
+            <span asp-validation-for="Review.Rating" class="text-danger"></span>
+        </div>
+    </div>
+
+     <div class="row justify-content-md-center">
+        <label asp-for="Review.userName" class="col-md-2"><h5>Nazwa użytkownika:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Review.userName" class="form-control mb-3" value=@Model.Review.userName />
+            <span asp-validation-for="Review.userName" class="text-danger"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Zapisz</button>
+    <a asp-controller="Admin" asp-action="Reviews">
+        <button class="btn btn-danger" type="button">Anuluj</button>
+    </a>
+</form>

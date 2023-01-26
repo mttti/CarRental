@@ -11,13 +11,19 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IPriceListRepository, EFPriceListRepository>();
 builder.Services.AddScoped<ICarRepository, EFCarRepository>();
 builder.Services.AddScoped<IReviewRepository, EFReviewRepository>();
+builder.Services.AddScoped<IUserRepository, EFUserRepository>();
+builder.Services.AddScoped<IRoleRepository, EFRoleRepository>();
+builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
+builder.Services.AddScoped<ICarDefectRepository, EFCarDefectRepository>();
 builder.Services.AddDbContext<AppDbContext>();
 
 
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
    .AddNegotiate();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+/*builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();*/
+
+builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddAuthorization(options =>
 {

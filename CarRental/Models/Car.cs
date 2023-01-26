@@ -27,6 +27,7 @@ namespace CarRental.Models
 
         public int PriceListId { get; set; }
 
-        public ICollection<Review> Reviews { get; set; }
+        public ICollection<Review>? Reviews { get; set; }
+        public ICollection<Order>? Orders { get; set; }
     }
 }

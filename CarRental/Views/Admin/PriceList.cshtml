@@ -1,0 +1,52 @@
+﻿@using CarRental.Models.ViewModels
+@model PriceListViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Cennik";
+}
+<a asp-action="PriceListEdit" asp-controller="Admin">
+    <btn class="btn btn-success mb-5 w-25 p-3">Dodaj nową pozycję w cenniku</btn>
+</a>
+<hr />
+<div class="table-responsive-md ">
+    <table class="table table-hover table-light">
+    <tr>
+        <th>Id</th>
+        <th scope="col">Typ nadwozia</th>
+        <th scope="col">Cena startowa</th>
+        <th scope="col">Cena za dzień</th>
+        <th>Akcje</th>
+    </tr>
+    @foreach (var item in Model.PriceList)
+    {
+        <tr>
+            <td>@item.PriceListId</td>
+            <td>@item.CarType</td>
+            <td>@item.BasePrice.ToString("c")</td>
+            <td>@item.Price.ToString("c")</td>
+            <td>
+                <div class="row justify-content-center w-100"> 
+                    <div class="col d-flex align-items-center justify-content-center">
+                        <a asp-action="PriceListEdit" asp-controller="Admin" asp-route-priceListID=@item.PriceListId>
+                            <btn class="btn btn-success">Edytuj</btn>
+                        </a>
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        @if(@Model.Cars.FirstOrDefault(i=>i.PriceListId==@item.PriceListId) is not null)
+                        {
+                            <button class="btn btn-danger" disabled>Istnieje przypisany samochód</button>
+                        }
+                        else
+                        {
+                            <a asp-action="PriceListDelete" asp-controller="Admin" asp-route-priceListID=@item.PriceListId>
+                                <btn class="btn btn-danger">Usuń</btn>
+                            </a>
+                        }       
+                    </div>                    
+                </div>
+            </td>
+        </tr>
+    }
+    </table>
+</div>

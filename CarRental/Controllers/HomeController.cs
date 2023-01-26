@@ -30,23 +30,5 @@ namespace CarRental.Controllers
         {
             return View(_priceListRepository.priceLists);
         }
-
-        public ViewResult Edit(int id)
-        {
-            return View(_priceListRepository.priceLists.FirstOrDefault(o => o.PriceListId == id));
-        }
-        [HttpPost]
-        public IActionResult Edit(PriceList priceList)
-        {
-            if (ModelState.IsValid)
-            {
-                _priceListRepository.Save(priceList);
-                TempData["message"] = $"{priceList.CarType} został edytowany.";
-                return RedirectToAction("PriceList");
-            }
-            else
-                return View(priceList);
-        }
-
     }
 }

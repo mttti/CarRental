@@ -1,15 +1,24 @@
 ﻿@using CarRental.Models.ViewModels;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
 @model PriceListViewModel
-
-
 
 @{
     Layout = "_Layout";
     ViewBag.Title = "Flota";
 }
+@if (@Model.Cars.Count() == 0)
+{
+    <h1>Wszystkie samochody są obecnie w naprawie :(</h1>
+}
+else
+{
+    
 
 <div class="table-responsive-md">
-    <table class="table table-hover table-light">
+        @foreach (var item in Model.Cars)
+        {
+            <table class="table table-hover table-light">
         <tr class="align-middle">
             <th>Marka</th>
             <th>Model</th>
@@ -20,33 +29,56 @@
             <th>Cena za dzień</th>
             <th>Cena startowa</th>
             <th>Podgląd</th>
-            <th>Akcje</th>
+
         </tr>
-        @foreach (var item in Model.Cars)
-        {
             <tr class="align-middle">
                 <td>@item.Brand</td>
                 <td>@item.Model</td>
                 <td>@item.Color</td>
-                <td>@item.Mileage</td>
+                <td>@item.Mileage km</td>
                 <td>@item.Description</td>
                 <td>@Model.PriceList.FirstOrDefault(o=>o.PriceListId==item.PriceListId).CarType</td>
                 <td>@Model.PriceList.FirstOrDefault(o=>o.PriceListId==item.PriceListId).Price.ToString("c")</td>
                 <td>@Model.PriceList.FirstOrDefault(o=>o.PriceListId==item.PriceListId).BasePrice.ToString("c")</td>
                 <td>
-                    <img style="height:10vh;" src="~/img/@item.ImgSrc">
-                </td>
-                <td>
-                  @*  <form id="@item.Id" asp-controller="Car" asp-action="CustomersReviews">
-                        <input type="hidden" name="carID" value=@item.Id>
-                        <button type="submit">Opinie</button>
-                    </form>*@
-                    <button type="submit" asp-action="CustomersReviews" asp-controller="Car" asp-route-carId=@item.Id>Opinie</button>
-                    <a asp-action="CustomersReviews" asp-controller="Car" asp-route-carId=@item.Id>Opinie</a>
-                    <button>Zamów</button>
+                    <img style="height:15vh;" src="~/img/@item.ImgSrc">
                 </td>
             </tr>
+            </table>
+            <div class="row justify-content-center"> 
+                <div class="col-md-4">
+                    @if (@Model.Reviews.Where(i => i.CarId == @item.Id).Count() > 0)
+                    {
+                    <a asp-action="CustomersReviews" asp-controller="Car" asp-route-carId=@item.Id>
+                        <button class="btn btn-primary mb-4 w-50 h-75">Opinie</button>
+                    </a>
+                    }
+                    else
+                    {
+                        <button class="btn btn-primary mb-4 w-50 h-75" disabled>Ten samochód nie posiada opinii</button>
+                    }
+                    
+                </div>
+
+                <div class="col-md-4">
+
+                    @if(@SignInManager.IsSignedIn(User))
+                    {
+                        <a asp-action="Add" asp-controller="Order" asp-route-CarID=@item.Id asp-route-userName=@User.Identities.FirstOrDefault().Name> 
+                            <button class="btn btn-primary mb-4 w-50 h-75">Zamów</button>
+                        </a> 
+                    }else
+                    {
+                        <a asp-action="Add" asp-controller="Order" asp-route-CarID=@item.Id asp-route-userName=@User.Identities.FirstOrDefault().Name> 
+                            <button disabled class="btn btn-primary mb-4 w-50 h-75">Zaloguj się żeby zamówić</button>
+                        </a> 
+                    }
+
+          
+                </div>
+            </div>
         }
 
-    </table>
+    
 </div>
+}

@@ -1,0 +1,123 @@
+﻿@using CarRental.Models.ViewModels
+@model CarEditViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Samochody";
+}
+
+<form asp-controller="Admin" asp-action="CarEdit" method="post" role="form">
+    @if (@Model.Car.Id != 0)
+    {
+        <h2>Edytuj samochód</h2>       
+    }
+    else
+    {
+        <h2>Dodaj samochód</h2>
+    }
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (@Model.Car.Id != 0)
+        {
+        <div class="row justify-content-md-center">
+            <label asp-for="Car.Id" class="col-md-2"><h5>ID:</h5></label>
+        </div>
+        }
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @if (@Model.Car.Id != 0)
+            {
+                <input type="hidden" asp-for="Car.Id" value=@Model.Car.Id />
+                <input asp-for="Car.Id" class="form-control mb-3" value=@Model.Car.Id disabled />
+            }
+            <span asp-validation-for="Car.Id" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Car.Brand" class="col-md-2"><h5>Marka:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Car.Brand" class="form-control mb-3" value=@Model.Car.Brand />
+            <span asp-validation-for="Car.Brand" class="text-danger"></span>
+        </div>
+    </div>
+
+     <div class="row justify-content-md-center">
+        <label asp-for="Car.Model" class="col-md-2"><h5>Model:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Car.Model" class="form-control mb-3" value=@Model.Car.Model />
+            <span asp-validation-for="Car.Model" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Car.Color" class="col-md-2"><h5>Kolor:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Car.Color" class="form-control mb-3" value=@Model.Car.Color />
+            <span asp-validation-for="Car.Color" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Car.Mileage" class="col-md-2"><h5>Przebieg:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Car.Mileage" class="form-control mb-3" value=@Model.Car.Mileage />
+            <span asp-validation-for="Car.Mileage" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Car.Description" class="col-md-2"><h5>Opis:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Car.Description" class="form-control mb-3" value=@Model.Car.Description />
+            <span asp-validation-for="Car.Description" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Car.PriceListId" class="col-md-2"><h5>Typ nadwozia:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @Html.DropDownList("Car.PriceListId", @Model.CarTypes)
+            <span asp-validation-for="Car.PriceListId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Car.IsBroken" class="col-md-2"><h5>Czy zepsute:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">            
+            <select asp-for="Car.IsBroken" required>
+                <option value="" disabled selected>Wybierz z listy</option>
+                <option value=true>Tak</option>
+                <option value=false>Nie</option>
+            </select>  
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Car.ImgSrc" class="col-md-2"><h5>Nazwa pliku graficznego z rozszerzeniem:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Car.ImgSrc" class="form-control mb-3" value=@Model.Car.ImgSrc />
+            <span asp-validation-for="Car.ImgSrc" class="text-danger"></span>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Zapisz</button>
+    <a asp-controller="Admin" asp-action="Cars">
+        <button class="btn btn-danger" type="button">Anuluj</button>
+    </a>
+</form>

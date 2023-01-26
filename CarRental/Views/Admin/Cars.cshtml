@@ -1,0 +1,56 @@
+﻿@using CarRental.Models.ViewModels
+@model PriceListViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Samochody";
+}
+
+<a asp-action="CarEdit" asp-controller="Admin">
+    <btn class="btn btn-success mb-5 w-25 p-3">Dodaj nowy samochód</btn>
+</a>
+<hr />
+
+<div class="table-responsive-md">
+    <table class="table table-hover table-light">
+        <tr class="align-middle">
+            <th>ID</th>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Kolor</th>
+            <th>Przebieg</th>
+            <th>Opis</th>
+            <th>Typ nadwozia</th>
+            <th>Cena za dzień</th>
+            <th>Cena startowa</th>
+            <th>Czy zepsute</th>
+            <th>Nazwa pliku graficznego</th>
+            <th>Akcje</th>
+        </tr>
+        @foreach (var item in Model.Cars)
+        {
+            <tr class="align-middle">
+                <td>@item.Id</td>
+                <td>@item.Brand</td>
+                <td>@item.Model</td>
+                <td>@item.Color</td>
+                <td>@item.Mileage km</td>
+                <td>@item.Description</td>
+                <td>@Model.PriceList.FirstOrDefault(o=>o.PriceListId==item.PriceListId).CarType</td>
+                <td>@Model.PriceList.FirstOrDefault(o=>o.PriceListId==item.PriceListId).Price.ToString("c")</td>
+                <td>@Model.PriceList.FirstOrDefault(o=>o.PriceListId==item.PriceListId).BasePrice.ToString("c")</td>
+                <td>@item.IsBroken</td>
+                <td>@item.ImgSrc</td>
+                <td>
+                    <a asp-action="CarEdit" asp-controller="Admin" asp-route-carID=@item.Id>
+                        <button class="btn btn-success">Edytuj</button>
+                    </a>
+                    <a asp-action="CarDelete" asp-controller="Admin" asp-route-carID=@item.Id>
+                        <button class="btn btn-danger mt-3">Usuń</button>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

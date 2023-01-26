@@ -17,6 +17,138 @@ namespace CarRental.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
 
+            modelBuilder.Entity("CarRental.Models.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "26481377-54b6-4866-9552-673295ea5e98",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f015eaf3-5b3b-47e9-adc3-33766a773483",
+                            Email = "admin@admin.pl",
+                            EmailConfirmed = false,
+                            LastName = "Magiera",
+                            LockoutEnabled = false,
+                            Name = "Mateusz",
+                            NormalizedEmail = "ADMIN@ADMIN.PL",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEC19xe2JYKHwo6W52VNnunMQQgG8AI8cj33ml19oo2pbWHfdeTInBgwsxBzVP5yYA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a3771fe6-d465-41ae-b8d8-1d8a2a088816",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "ff023250-c33f-48c2-80b8-703f5ab34531",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5a08b25c-1cbd-4c14-b8b6-7d53de3c6dea",
+                            Email = "Mietekmechanik@onet.pl",
+                            EmailConfirmed = false,
+                            LastName = "Kowalski",
+                            LockoutEnabled = false,
+                            Name = "Mieczyslaw",
+                            NormalizedEmail = "MIETEKMECHANIK@ONET.PL",
+                            NormalizedUserName = "MIETEKMECHANIK",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGcdp18lCOnlT6RKvbQK0wOoUxJpAaYNqZosBpBZQvFeCUEpU1WGCPTLLB9NVIHqZw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "243d03cf-fbd5-4e06-8080-22923d02a945",
+                            TwoFactorEnabled = false,
+                            UserName = "MietekMechanik"
+                        },
+                        new
+                        {
+                            Id = "a4d55acc-2778-48ed-bd6e-7d454db01b09",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "dcac8113-424d-4b88-adb3-78fe1e846c75",
+                            Email = "jnowak@interia.pl",
+                            EmailConfirmed = false,
+                            LastName = "Kowalski",
+                            LockoutEnabled = false,
+                            Name = "Jan",
+                            NormalizedEmail = "JNOWAK@INTERIA.PL",
+                            NormalizedUserName = "NOWAK_JAN",
+                            PasswordHash = "AQAAAAEAACcQAAAAECvS28jPNtIVhEjlVO5ndAvNXF57iJiFEBzcaA7pyWTtY1hR2LNo2sAfKdO5xl2Ocg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "76cacddb-2912-4b28-9e4e-ea6933a51e5b",
+                            TwoFactorEnabled = false,
+                            UserName = "Nowak_Jan"
+                        });
+                });
+
             modelBuilder.Entity("CarRental.Models.Car", b =>
                 {
                     b.Property<int>("Id")
@@ -79,7 +211,7 @@ namespace CarRental.Migrations
                             Color = "Czerwony",
                             Description = "Czerwone audi. Brak dachu zwiększa przyspieszenie.",
                             ImgSrc = "audi.png",
-                            IsBroken = true,
+                            IsBroken = false,
                             Mileage = 40,
                             Model = "A3",
                             PriceListId = 2
@@ -95,6 +227,94 @@ namespace CarRental.Migrations
                             Mileage = 200,
                             Model = "C5",
                             PriceListId = 3
+                        });
+                });
+
+            modelBuilder.Entity("CarRental.Models.CarDefect", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool?>("IsSolved")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("carDefects");
+                });
+
+            modelBuilder.Entity("CarRental.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool?>("IsReported")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("IsReviewed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CarId = 1,
+                            EndDate = new DateTime(2023, 1, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsReported = false,
+                            IsReviewed = false,
+                            Price = 1600m,
+                            StartDate = new DateTime(2023, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "a4d55acc-2778-48ed-bd6e-7d454db01b09"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CarId = 3,
+                            EndDate = new DateTime(2023, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsReported = false,
+                            IsReviewed = false,
+                            Price = 1600m,
+                            StartDate = new DateTime(2023, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "a4d55acc-2778-48ed-bd6e-7d454db01b09"
                         });
                 });
 
@@ -153,10 +373,18 @@ namespace CarRental.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasMaxLength(200)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Rating")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("userName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -170,21 +398,27 @@ namespace CarRental.Migrations
                             Id = 1,
                             CarId = 1,
                             Description = "Przyjemny samochód",
-                            Rating = 4
+                            OrderId = 0,
+                            Rating = 4,
+                            userName = "Joanna"
                         },
                         new
                         {
                             Id = 2,
                             CarId = 2,
                             Description = "Słaby samochód",
-                            Rating = 2
+                            OrderId = 0,
+                            Rating = 2,
+                            userName = "Jakub"
                         },
                         new
                         {
                             Id = 3,
                             CarId = 3,
                             Description = "Średni samochód",
-                            Rating = 3
+                            OrderId = 0,
+                            Rating = 3,
+                            userName = "Michał"
                         });
                 });
 
@@ -217,16 +451,23 @@ namespace CarRental.Migrations
                         new
                         {
                             Id = "0773fad5-d7e7-47e1-9ef8-6fad8120694f",
-                            ConcurrencyStamp = "e2ab69d9-2032-431b-b82b-bd66e5643b4d",
+                            ConcurrencyStamp = "9f1a581a-c16e-4891-964e-c0e5054a151a",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5d1880d4-bc4a-4873-9043-5320c72b35c0",
-                            ConcurrencyStamp = "2a48fe79-835d-49a6-b816-d0fd3c0512a3",
+                            ConcurrencyStamp = "6be36eb1-d114-46de-a474-ab24c48f0bbc",
                             Name = "mechanik",
                             NormalizedName = "MECHANIK"
+                        },
+                        new
+                        {
+                            Id = "e2293ff5-14f7-4a5d-8e36-6ec3107d0f99",
+                            ConcurrencyStamp = "0ef639ae-bc2f-40ff-8383-e873119d337d",
+                            Name = "uzytkownik",
+                            NormalizedName = "UZYTKOWNIK"
                         });
                 });
 
@@ -251,78 +492,6 @@ namespace CarRental.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -394,6 +563,11 @@ namespace CarRental.Migrations
                         {
                             UserId = "ff023250-c33f-48c2-80b8-703f5ab34531",
                             RoleId = "5d1880d4-bc4a-4873-9043-5320c72b35c0"
+                        },
+                        new
+                        {
+                            UserId = "a4d55acc-2778-48ed-bd6e-7d454db01b09",
+                            RoleId = "e2293ff5-14f7-4a5d-8e36-6ec3107d0f99"
                         });
                 });
 
@@ -416,77 +590,6 @@ namespace CarRental.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CarRental.Models.AppUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasDiscriminator().HasValue("AppUser");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "26481377-54b6-4866-9552-673295ea5e98",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "dd7374cf-0808-4151-8f9a-ab4ca80f96d1",
-                            Email = "admin@admin.pl",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@ADMIN.PL",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPc+6OPXtoNaoQaaSGROehJrzyWA7UKbgZUY/1vrvJnLScJhlpzlO/DgD824QErN+Q==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "04f15619-c967-4cac-90bc-2caa9b58f82c",
-                            TwoFactorEnabled = false,
-                            UserName = "Admin",
-                            LastName = "Magiera",
-                            Name = "Mateusz"
-                        },
-                        new
-                        {
-                            Id = "ff023250-c33f-48c2-80b8-703f5ab34531",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "e8ee6c45-9439-414f-a87a-048464c0d06b",
-                            Email = "Mietekmechanik@onet.pl",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MIETEKMECHANIK@ONET.PL",
-                            NormalizedUserName = "MIETEKMECHANIK",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP8+k+wIFP3t6+Qw8DA1T5p3gA//4uMOlZiv8qMBAq6RDhpE8r44HM6DgxaWpZRHCg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "64cd658c-d672-4616-95ed-965bb589a020",
-                            TwoFactorEnabled = false,
-                            UserName = "MietekMechanik",
-                            LastName = "Kowalski",
-                            Name = "Mieczyslaw"
-                        },
-                        new
-                        {
-                            Id = "a4d55acc-2778-48ed-bd6e-7d454db01b09",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d313ec76-03b4-4702-94ed-f01e8612f8d0",
-                            Email = "jnowak@interia.pl",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "JNOWAK@INTERIA.PL",
-                            NormalizedUserName = "NOWAK_JAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGPtAB3G3qJbrt1iktujvuLXeyoeu6FF8esAzG1A9J5Z/kzAYzXGNuVwISKphWcqIQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "dcce6f59-da7d-42c4-9976-c6a63bba746a",
-                            TwoFactorEnabled = false,
-                            UserName = "Nowak_Jan",
-                            LastName = "Kowalski",
-                            Name = "Jan"
-                        });
-                });
-
             modelBuilder.Entity("CarRental.Models.Car", b =>
                 {
                     b.HasOne("CarRental.Models.PriceList", "PriceList")
@@ -496,6 +599,17 @@ namespace CarRental.Migrations
                         .IsRequired();
 
                     b.Navigation("PriceList");
+                });
+
+            modelBuilder.Entity("CarRental.Models.Order", b =>
+                {
+                    b.HasOne("CarRental.Models.Car", "Car")
+                        .WithMany("Orders")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
                 });
 
             modelBuilder.Entity("CarRental.Models.Review", b =>
@@ -520,7 +634,7 @@ namespace CarRental.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("CarRental.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -529,7 +643,7 @@ namespace CarRental.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("CarRental.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -544,7 +658,7 @@ namespace CarRental.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("CarRental.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -553,7 +667,7 @@ namespace CarRental.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("CarRental.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -562,6 +676,8 @@ namespace CarRental.Migrations
 
             modelBuilder.Entity("CarRental.Models.Car", b =>
                 {
+                    b.Navigation("Orders");
+
                     b.Navigation("Reviews");
                 });
 

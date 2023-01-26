@@ -1,0 +1,110 @@
+﻿@using CarRental.Models.ViewModels
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> userManager
+@model UserEditViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Użytkownicy";
+}
+
+<form asp-controller="Admin" asp-action="UserEdit" method="post" role="form">
+    @*@if (!roleManager.Roles.Any(i=>i.Id==@Model.Id))*@
+    @if (!userManager.Users.Any(i=>i.Id==@Model.User.Id))
+    {
+        <h2>Dodaj użytkownika</h2>
+    }
+    else
+    {
+        <h2>Edytuj użytkowika</h2>       
+    }
+    <hr />
+
+    @if (userManager.Users.Any(i=>i.Id==@Model.User.Id))
+        {
+        <div class="row justify-content-md-center">
+            <label asp-for="User.Id" class="col-md-2"><h5>ID:</h5></label>
+        </div>
+        }
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+        @if (userManager.Users.Any(i=>i.Id==@Model.User.Id))
+        {
+            <input type="hidden" asp-for="User.Id" value=@Model.User.Id />
+            <input asp-for="User.Id" class="form-control mb-3" value=@Model.User.Id disabled />
+        }
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="User.Email" class="col-md-2"><h5>Adres email:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="User.Email" class="form-control mb-3" value="@Model.User.Email"/>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="User.UserName" class="col-md-2"><h5>Login:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="User.UserName" class="form-control mb-3" value="@Model.User.UserName"/>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="User.Name" class="col-md-2"><h5>Imie:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="User.Name" class="form-control mb-3 " value="@Model.User.Name"/>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="User.LastName" class="col-md-2"><h5>Nazwisko:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="User.LastName" class="form-control mb-3" value="@Model.User.LastName" />
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="User.PhoneNumber" class="col-md-2"><h5>Numer telefonu:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="User.PhoneNumber" class="form-control mb-3" value="@Model.User.PhoneNumber" />
+        </div>
+    </div>
+
+    
+
+    @if (userManager.Users.Any(i => i.Id == @Model.User.Id))
+    {
+        <div class="row justify-content-md-center">
+            <label asp-for="Roles" class="col-md-2"><h5>Dodaj do roli:</h5></label>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-3">
+                @Html.DropDownList("User.Role", @Model.Roles)
+                <span asp-validation-for="User.Role" class="text-danger"></span>
+            </div>
+        </div>
+    }
+
+    <div class="row justify-content-md-center mt-3">
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-success w-75">Zapisz</button>
+        </div>
+        <div class="col-md-2"> 
+            <a asp-action="Users" asp-controller="Admin">
+                <btn class="btn btn-danger w-75">Anuluj</btn>
+            </a>
+        </div>
+        </div>
+    </div>
+</form>

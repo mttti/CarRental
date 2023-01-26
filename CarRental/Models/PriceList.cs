@@ -7,6 +7,6 @@
         public decimal BasePrice { get; set; }
         public string CarType { get; set; }
 
-        virtual public ICollection<Car> cars { get; set; }
+        virtual public ICollection<Car>? cars { get; set; }
     }
 }

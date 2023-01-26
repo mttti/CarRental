@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Review>
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Oceny";
+}
+
+<a asp-action="ReviewEdit" asp-controller="Admin">
+    <btn class="btn btn-success mb-5 w-25 p-3">Dodaj nową opinie</btn>
+</a>
+<hr />
+<table class="table table-light table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Ocena</th>
+        <th>Nazwa użytkownika</th>
+        <th>ID samochodu</th>
+        <th>ID zamówienia</th>
+        <th>Treść</th>
+        <th>Akcje</th>
+    </tr>
+    @foreach (var review in @Model)
+    {
+        <tr>
+            <td>@review.Id</td>
+            <td>@review.Rating /5</td>
+            <td>@review.userName</td>
+            <td>@review.CarId</td>
+            <td>@review.OrderId</td>
+            <td class="text-wrap">@review.Description</td>
+            <td>
+                <div class="row justify-content-center w-100"> 
+                    <div class="col">
+                        <a asp-action="ReviewEdit" asp-controller="Admin" asp-route-reviewID=@review.Id>
+                            <btn class="btn btn-success">Edytuj</btn>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a asp-action="ReviewDelete" asp-controller="Admin" asp-route-reviewID=@review.Id>
+                            <btn class="btn btn-danger mt-3">Usuń</btn>
+                        </a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+</table>

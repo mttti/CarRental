@@ -18,8 +18,8 @@ namespace CarRental.Controllers
             this.priceListRepository = priceListRepository;
             this.reviewRepository = reviewRepository;
         }
-        [AllowAnonymous]
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var viewModel = new PriceListViewModel
@@ -31,24 +31,15 @@ namespace CarRental.Controllers
 
             return View(viewModel);
         }
-        [Authorize(Roles = "mechanik, admin")]
-        public IActionResult BrokenCars()
-        {
-            var viewModel = new PriceListViewModel
-            {
-                PriceList = priceListRepository.priceLists,
-                Cars = carRepository.cars.Where(a => a.IsBroken == true)
-            };
-            return View("Index",viewModel);
-        }
-        [AllowAnonymous]
 
+        [AllowAnonymous]
         public IActionResult CustomersReviews(int carID)
         {
-            reviewRepository.Reviews
-                .FirstOrDefault(r => r.CarId == carID).Car=carRepository.cars
-                .FirstOrDefault(c=>c.Id==carID);
-            return View(reviewRepository.Reviews.Where(r=>r.CarId==carID));
+                reviewRepository.Reviews
+                .FirstOrDefault(r => r.CarId == carID).Car = carRepository.cars
+                .FirstOrDefault(c => c.Id == carID);
+                return View(reviewRepository.Reviews.Where(r => r.CarId == carID));
+            
         }
     }
 }

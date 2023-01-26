@@ -1,0 +1,98 @@
+﻿@using CarRental.Models.ViewModels
+@model CarDefectEditViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Usterki";
+}
+
+<form asp-action="CarDefectEdit" asp-controller="Admin" method="post">
+    @if (@Model.carDefect.Id != 0)
+        {
+        <h2>Edytuj zgłoszenie</h2>       
+        }
+    else
+        {
+        <h2>Dodaj zgłoszenie</h2>
+        }
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (@Model.carDefect.Id != 0)
+    {
+        <div class="row justify-content-md-center">
+            <label asp-for="carDefect.Id" class="col-md-2"><h5>ID:</h5></label>
+        </div>
+    }
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @if (@Model.carDefect.Id != 0)
+            {
+                <input type="hidden" asp-for="carDefect.Id" value=@Model.carDefect.Id />
+                <input asp-for="carDefect.Id" class="form-control mb-3" value=@Model.carDefect.Id disabled />
+            }
+            <span asp-validation-for="carDefect.Id" class="text-danger"></span>
+        </div>
+    </div> 
+
+    <div class="row justify-content-md-center">
+        <label asp-for="carDefect.Description" class="col-md-2"><h5>Opis:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <textarea asp-for="carDefect.Description" placeholder="Maksymalna długość to 200 znaków" rows="8" cols="100" class="form-control">@Model.carDefect.Description</textarea>
+            <span asp-validation-for="carDefect.Description" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="carDefect.CarId" class="col-md-2"><h5>Samochód:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @Html.DropDownList("CarDefect.carId", @Model.CarIDs)
+            <span asp-validation-for="carDefect.CarId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="carDefect.CarId" class="col-md-2"><h5>Zgłaszający:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @Html.DropDownList("CarDefect.UserName", @Model.UserNames)
+            <span asp-validation-for="carDefect.UserName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="carDefect.CarId" class="col-md-2"><h5>Numer zamówienia:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @Html.DropDownList("CarDefect.OrderId", @Model.OrderIDs)
+            <span asp-validation-for="carDefect.OrderId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="carDefect.IsSolved" class="col-md-2"><h5>Czy problem został rozwiązany?:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">            
+            <select asp-for="carDefect.IsSolved" required>
+                <option value="" disabled selected>Wybierz z listy</option>
+                <option value=true>Tak</option>
+                <option value=false>Nie</option>
+            </select>  
+        </div>
+    </div>       
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <button type="submit" class="btn btn-success mt-3 w-50">Wyślij</button>
+            </div>
+            <div class="col-md-5">
+            <a asp-action="CarDefects" asp-controller="Admin">
+                <btn class="btn btn-danger mt-3 w-50">Anuluj</btn>
+            </a>
+            </div>
+        </div>
+</form>

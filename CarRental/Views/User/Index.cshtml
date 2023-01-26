@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model AppUser
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Konto";
+}
+
+<form asp-action="Edit" asp-controller="User" method="post">
+    <div asp-validation-summary="All" style="list-style: none"></div>  
+    <div class="row justify-content-md-center">
+        <label asp-for="Email" class="col-md-2"><h5>Adres email:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Email" class="form-control mb-3"/>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="Name" class="col-md-2"><h5>Imie:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Name" class="form-control mb-3 " value="@Model.Name"/>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="LastName" class="col-md-2"><h5>Nazwisko:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="LastName" class="form-control mb-3" />
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <label asp-for="PhoneNumber" class="col-md-2"><h5>Numer telefonu:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="PhoneNumber" class="form-control mb-3" />
+        </div>
+    </div
+
+
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="UserName" />
+    <button type="submit" class="btn btn-success">Zapisz</button>
+    <a asp-action="Index" asp-controller="Home">
+        <btn class="btn btn-danger">Anuluj</btn>
+    </a>
+</form>

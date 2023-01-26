@@ -1,0 +1,51 @@
+﻿@using CarRental.Models.ViewModels
+@model BrokenCarsViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Usterki";
+}
+
+@if (@Model.CarDefects.Count() == 0)
+{
+    <h1>Nie ma żadnych nowych usterek</h1>
+}
+else
+{
+
+    <table class="table table-light">
+        <tr>
+            <th>Id samochodu</th>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Opis usterki</th>
+            <th>Akcje</th>
+        </tr>
+        @foreach (var report in @Model.CarDefects)
+        {
+            @if (@Model.Cars.FirstOrDefault(i => i.Id == report.CarId).IsBroken == true)
+            {
+                <tr>
+                <td>@report.CarId</td>
+                <td>@Model.Cars.FirstOrDefault(i=>i.Id==report.CarId).Brand</td>
+                <td>@Model.Cars.FirstOrDefault(i=>i.Id==report.CarId).Model</td>
+                <td class="text-break">@report.Description</td>
+                <td>
+                    <div class="row justify-content-center w-100">
+                        <div class="col">
+                    <a asp-controller="Mechanic" asp-action="Repair" asp-route-carID=@report.CarId asp-route-reportID=@report.Id>
+                        <button class="btn btn-success">Oznacz jako naprawiony</button>
+                    </a></div>
+                        <div class="col">
+                    <a asp-controller="Mechanic" asp-action="History" asp-route-carID=@report.CarId>
+                        <button class="btn btn-warning">Historia usterek</button>
+                        </a>
+                    </div>
+                    </div>
+                </td>
+            </tr>
+            }
+
+        }
+    </table>
+}

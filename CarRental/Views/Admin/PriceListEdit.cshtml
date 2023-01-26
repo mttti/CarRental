@@ -1,0 +1,59 @@
+﻿@model PriceList
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Cennik";
+}
+<form asp-action="PriceListEdit" method="post">
+    @if (@Model.PriceListId != 0)
+    {
+        <h2>Edytuj pozycję w cenniku</h2>        
+    }
+    <h2>Dodaj pozycję w cenniku</h2>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (@Model.PriceListId != 0)
+        {
+        <div class="row justify-content-md-center">
+            <label asp-for="PriceListId" class="col-md-2"><h5>ID:</h5></label>
+        </div>
+        }
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            @if (@Model.PriceListId != 0)
+            {
+                <input type="hidden" asp-for="PriceListId" value=@Model.PriceListId />
+                <input asp-for="PriceListId" class="form-control mb-3" value=@Model.PriceListId disabled />
+            }
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+            <label asp-for="Price" class="col-md-2"><h5>Cena za dzień:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="Price" class="form-control mb-3" value=@Model.Price />
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <label asp-for="BasePrice" class="col-md-2"><h5>Cena bazowa:</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="BasePrice" class="form-controm mb-3" value=@Model.BasePrice />
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <label asp-for="CarType" class="col-md-2"><h5>Typ samochodu</h5></label>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <input asp-for="CarType" class="form-controm mb-3" value=@Model.CarType/>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Zapisz</button>
+    <a asp-action="PriceList" >
+        <button class="btn btn-danger" type="button">Anuluj</button>
+    </a>
+</form>

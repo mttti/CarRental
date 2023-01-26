@@ -8,12 +8,10 @@ namespace CarRental.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-
-        /*        private readonly UserManager<AppUser> _userManager;
-                private readonly SignInManager<AppUser> _signInManager;*/
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+    
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -85,10 +83,11 @@ namespace CarRental.Controllers
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new AppUser() { UserName = registerViewModel.Login, Email=registerViewModel.Email, Name=registerViewModel.Name, LastName=registerViewModel.LastName};
+                var user = new AppUser() { UserName = registerViewModel.Login, Email=registerViewModel.Email, Name=registerViewModel.Name, LastName=registerViewModel.LastName};               
                 var result = await _userManager.CreateAsync(user, registerViewModel.Password);
                 if (result.Succeeded)
                 {
+                    _userManager.AddToRoleAsync(user, "uzytkownik");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }

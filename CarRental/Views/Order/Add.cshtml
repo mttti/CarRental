@@ -1,0 +1,75 @@
+﻿@using CarRental.Models.ViewModels;
+@model OrderViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Zamówienie";
+    var today = DateTime.Today;//2019-06-02
+    string minDateStart = $"{today.Year}-{today.Month.ToString("00")}-{today.Day.ToString("00")}";
+    string minDateEnd = $"{today.Year}-{today.Month.ToString("00")}-{(today.Day + 1).ToString("00")}";
+}
+
+
+<h2>Wybrałeś @Model.Car.Brand @Model.Car.Model </h2>
+<h2>Cena: @Model.PriceList.Price.ToString("c") za dzień + @Model.PriceList.BasePrice.ToString("c") ceny bazowej</h2>
+<hr />
+ <form asp-controller="Order" asp-action="Add" method="post">
+    <div class="row justify-content-md-center"> 
+        <div class="col-md-3">
+            <h4>Wybierz datę początkową</h4>
+            <input asp-for=Order.StartDate type="date" min=@minDateStart value="@minDateStart" required/>
+        </div>
+    </div>
+    <div class="row justify-content-md-center"> 
+        <div class="col-md-3">
+            <h4>Wybierz datę końcową</h4>
+            <input asp-for=Order.EndDate type="date" min=@minDateEnd value=@minDateEnd required/>
+        </div>
+    </div>
+        <input type="hidden" asp-for="Order.CarId" value=@Model.Order.CarId />
+        <input type="hidden" asp-for="Order.UserId" value=@Model.Order.UserId />
+
+    <div class="row justify-content-md-center"> 
+        <div class="col-md-2">
+       <button type="submit" class="btn btn-success mt-3 w-100">Zamów</button>
+        </div>
+
+        <div class="col-md-2">
+            <a asp-action="Index" asp-controller="Car">
+            <btn class="btn btn-danger mt-3 w-100">Anuluj</btn>
+            </a>
+        </div>
+    </div>
+
+</form>
+
+
+
+@* <form asp-controller="Order" asp-action="Add" method="post">
+    <div class="row justify-content-md-center"> 
+        <div class="col-md-3">
+            <h4>Wybierz datę początkową</h4>
+            <input asp-for=Order.StartDate type="date" min=@minDateStart value="@minDateStart" required/>
+        </div>
+    </div>
+    <div class="row justify-content-md-center"> 
+        <div class="col-md-3">
+            <h4>Wybierz datę końcową</h4>
+            <input asp-for=Order.EndDate type="date" min=@minDateEnd value=@minDateEnd required/>
+        </div>
+    </div>
+        <input type="hidden" asp-for="Order.CarId" value=@Model.Order.CarId />
+        <input type="hidden" asp-for="Order.UserId" value=@Model.Order.UserId />
+    <div class="row justify-content-md-center"> 
+        <div class="col-md-2">
+       <button type="submit" class="btn btn-success mt-3 w-100">Zamów</button>
+        </div>
+
+        <div class="col-md-2">
+            <a asp-action="Index" asp-controller="Car">
+            <btn class="btn btn-danger mt-3 w-100">Anuluj</btn>
+            </a>
+        </div>
+    </div>
+
+</form>*@
