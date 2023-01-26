@@ -7,8 +7,6 @@ body {
     background-size: cover;
     background-color: rgba(255, 255, 255, 1);
     background-attachment: fixed;
-    /*font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;*/
-   /* font-family: 'Ubuntu', sans-serif;*/
     padding: 0;
     margin: 0;
     font-size: 1.2rem;
@@ -58,23 +56,32 @@ nav ul li a {
 }
 #adminOptions ul{
     display: none;
+    height: auto;
     position: absolute;
-    top: 200%;
+    /*top: 200%;*/
+    z-index: 1;
     flex-direction: column;
     list-style-type: none;
-    margin-top: 3vw;
-    width: 14vw;
+    /*margin-top: 3vw;*/
+    max-width: 14vw;
+    /*padding: 10px;*/
+    padding: 0;   
 }
+    #adminOptions ul li a {
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    }
 
 #accountOptions ul {
     display: none;
     position: absolute;
+    height: auto;
     flex-direction: column;
     list-style-type: none;
-    margin-top: 2vw;
-    margin-left: -3vw;
-    width: 13vw;
+/*    margin-top: 2vw;
+    margin-left: -3vw;*/
+    max-width: 13vw;
     justify-content: center;
+    padding: 0;
 }
 
 #adminOptions:hover ul{
@@ -125,8 +132,4 @@ footer a:hover{
 }
 #logoutButton:hover {
     color: rgb(255, 208, 0) !important;
-}
-
-#adminOptions{
-    position: relative;
 }

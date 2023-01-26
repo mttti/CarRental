@@ -52,10 +52,11 @@ namespace CarRental.Models
 
 
             modelBuilder.Entity<Review>().HasData(
-                new Review() { Id = 1, CarId = 1, Rating = 4, Description = "Przyjemny samochód", userName = "Joanna"},
-                new Review() { Id = 2, CarId = 2, Rating = 2, Description = "Słaby samochód", userName = "Jakub" },
-                new Review() { Id = 3, CarId = 3, Rating = 3, Description = "Średni samochód", userName = "Michał" }
+                new Review() { Id = 1, CarId = 1, Rating = 4, Description = "Przyjemny samochód", userName = "Joanna", OrderId =1},
+                new Review() { Id = 2, CarId = 2, Rating = 2, Description = "Słaby samochód", userName = "Jakub", OrderId = 2 },
+                new Review() { Id = 3, CarId = 3, Rating = 3, Description = "Średni samochód", userName = "Michał", OrderId = 3 }
                 );
+
 
             modelBuilder.Entity<PriceList>().HasData(
                 new PriceList() { PriceListId = 1, Price = 400, BasePrice = 800, CarType = "Kabriolet" },
