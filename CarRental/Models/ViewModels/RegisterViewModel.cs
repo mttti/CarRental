@@ -25,11 +25,11 @@ namespace CarRental.Models.ViewModels
         [Compare("Password", ErrorMessage = "Wprowadzone hasła muszą być takie same.")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Wprowadź swoje imie!")]
+        [Required(ErrorMessage = "Wprowadź imie!")]
         [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Wprowadź swoje nazwisko!")]
+        [Required(ErrorMessage = "Wprowadź nazwisko!")]
         [Display(Name = "LastName")]
         public string LastName { get; set; }
 

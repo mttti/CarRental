@@ -1,12 +1,14 @@
 ﻿@using CarRental.Models.ViewModels
 @model RegisterViewModel
 @{
-    ViewBag.Title = "Zarejestruj się";
+    ViewBag.Title = "Dodawanie użytkownika";
     Layout = "_Layout";
 }
 
-<form asp-controller="Account" asp-action="Register" method="post" role="form">
-    <h2>Utwórz konto</h2>
+
+@*<h1 class="text-info">Register</h1>*@
+<form asp-controller="Admin" asp-action="UserRegister" method="post" role="form">
+    <h2>Dodaj użytkownika</h2>
     <hr />
 
     <div class="row justify-content-md-center">
@@ -71,7 +73,14 @@
     <br />
     <div class="row justify-content-md-center">
         <div class="offset-md-2 col-md-3">
-            <button type="submit" class="btn btn-success h-100 w-75">Zarejestruj się</button>
+            <button type="submit" class="btn btn-success h-100 w-75">Dodaj</button>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="offset-md-2 col-md-3">
+            <a asp-action="Users" asp-controller="Admin">
+             <button type="button" class="btn btn-danger h-100 w-75 mt-3">Anuluj</button>
+            </a>
         </div>
     </div>
 </form>

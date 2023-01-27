@@ -20,8 +20,7 @@ namespace CarRental.Models
             AppUser user = _context.Users.FirstOrDefault(u => u.Id == id);
             if (user != null)
             {
-                _context.Users.Remove(user);
-                _context.SaveChanges();
+                _user.DeleteAsync(user);
             }
             return user;
         }
@@ -30,7 +29,7 @@ namespace CarRental.Models
         {
             if (!_context.Users.Any(i=>i.Id==user.Id))
             {
-                _context.Add(user);
+                //_context.Add(user);
             }
             else
             {
@@ -38,7 +37,6 @@ namespace CarRental.Models
 
                 if (userEntry != null)
                 {                   
-                    _user.AddToRoleAsync(user, user.Role);
                     _user.SetUserNameAsync(userEntry, user.UserName);
                     userEntry.Email = user.Email;
                     userEntry.NormalizedEmail = user.Email.ToUpper();
@@ -46,10 +44,12 @@ namespace CarRental.Models
                     userEntry.LastName = user.LastName;
                     userEntry.PhoneNumber = user.PhoneNumber;
                     userEntry.Role = user.Role;
-                    
+                    _user.UpdateAsync(userEntry);
+                    _user.AddToRoleAsync(user, user.Role);
+
                 }
             }
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
     }

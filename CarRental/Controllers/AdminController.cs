@@ -312,6 +312,29 @@ namespace CarRental.Controllers
             userRepository.Delete(userID);
             return RedirectToAction("Users");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> UserRegister()
+        {
+            return View(new RegisterViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UserRegister(RegisterViewModel registerViewModel)
+        {           
+            if (ModelState.IsValid)
+            {
+                var user = new AppUser() { UserName = registerViewModel.Login, Email = registerViewModel.Email, Name = registerViewModel.Name, LastName = registerViewModel.LastName };
+                var result = await userManager.CreateAsync(user, registerViewModel.Password);
+                if (result.Succeeded)
+                {                 
+                    userManager.AddToRoleAsync(user, "uzytkownik");                    
+                    return RedirectToAction("Users");
+                }
+                ModelState.AddModelError("Login", "Ten login jest już zajęty");
+            }
+            return View(registerViewModel);
+        }
     }
 }
 

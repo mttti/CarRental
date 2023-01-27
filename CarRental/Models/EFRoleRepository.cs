@@ -20,8 +20,9 @@ namespace CarRental.Models
             var role = _appDbContext.Roles.FirstOrDefault(x => x.Id == id);
             if (role != null)
             {
-                _appDbContext.Roles.Remove(role);
-                _appDbContext.SaveChanges();
+                _roleManager.DeleteAsync(role);
+                //_appDbContext.Roles.Remove(role);
+                //_appDbContext.SaveChanges();
             }
             return role;
         }
@@ -38,11 +39,11 @@ namespace CarRental.Models
 
                 if (roleEntry != null)
                 {
-                    roleEntry.Name= role.Name;
-                    roleEntry.ConcurrencyStamp = Guid.NewGuid().ToString();
+                    roleEntry.Name = role.Name;
+                    _roleManager.UpdateAsync(roleEntry);
                 }
             }
-            _appDbContext.SaveChanges();
+            //_appDbContext.SaveChanges();
         }
     }
 }
