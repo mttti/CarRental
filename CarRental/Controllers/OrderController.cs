@@ -57,7 +57,7 @@ namespace CarRental.Controllers
                 return View(orderViewModel);
             }
         }
-
+        
         public IActionResult Index(string userName)
         {
             var userID = _user.FindByNameAsync(userName).Result.Id;

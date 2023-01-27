@@ -20,6 +20,7 @@ namespace CarRental.Controllers
         }
 
         [AllowAnonymous]
+        [Route("Flota")]
         public IActionResult Index()
         {
             var viewModel = new PriceListViewModel
@@ -33,6 +34,7 @@ namespace CarRental.Controllers
         }
 
         [AllowAnonymous]
+        [Route("Opinie/{carID}")]
         public IActionResult CustomersReviews(int carID)
         {
                 reviewRepository.Reviews

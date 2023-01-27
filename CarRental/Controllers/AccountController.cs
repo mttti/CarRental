@@ -16,9 +16,6 @@ namespace CarRental.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
-        
-
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login(string? returnUrl=null)
@@ -59,15 +56,10 @@ namespace CarRental.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-
-        [AllowAnonymous]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [AllowAnonymous]
         [HttpGet]
+        //[Route("Zarejestruj")]
+
         public async Task<IActionResult> Register(string? returnUrl = null)
         {
             RegisterViewModel registerViewModel = new RegisterViewModel();
@@ -77,6 +69,8 @@ namespace CarRental.Controllers
 
         [AllowAnonymous]
         [HttpPost]
+        //[Route("Zarejestruj")]
+
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel, string? returnUrl)
         {
             registerViewModel.ReturnUrl=returnUrl;
