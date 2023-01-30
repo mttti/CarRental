@@ -19,12 +19,10 @@ namespace CarRental.Controllers
         {
             return View();
         }
-        [Route("Kontakt")]
         public IActionResult Contact()
         {
             return View();
         }
-        [Route("Cennik")]
         public IActionResult PriceList()
         {
             return View(_priceListRepository.priceLists);
